@@ -1,25 +1,98 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import "./Components/Header/Header";
+import "./Components/Menu/Menu";
 
+import Menu from "./Components/Menu/Menu";
+import Header from "./Components/Header/Header";
+import ProveedoresTable from "./Components/Proveedores/ProveedoresTable";
+import Proveedor from "./Components/Proveedores/EditarProveedor";
+import Footer from "./Components/Footer/Footer";
+import Perfil from "./Components/Usuario/Perfil";
+import ClientesTable from "./Components/Clientes/ClientesTable";
+import ClienteEditar from "./Components/Clientes/EditarCliente";
+import EditarCategoria from "./Components/Categorias/EditarCategoria";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+import CategoriasTable from "./Components/Categorias/CategoriasTable";
+import SubcategoriasTable from "./Components/Subcategorias/SubcategoriasTable";
+import EditarSubcategoria from "./Components/Subcategorias/EditarSubcategoria";
+import LocalidadesTable from "./Components/Localidades/LocalidadesTable";
+import EditarLocalidad from "./Components/Localidades/EditarLocalidad";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+    <BrowserRouter>
+      <div className="App">
+        <div id="wrapper">
+          <Menu />
+          <div id="content-wrapper" className="d-flex flex-column">
+            <div id="content">
+              <Header />
+              <div className="container-fluid">
+                <div className="row">
+                  <Switch>
+                    <Route
+                      exact
+                      path="/Proveedores"
+                      component={ProveedoresTable}
+                    />
+                    <Route
+                      exact
+                      path="/Proveedores/:id"
+                      component={Proveedor}
+                    />
+
+                    <Route exact path="/Clientes" component={ClientesTable} />
+                    <Route
+                      exact
+                      path="/Clientes/:id"
+                      component={ClienteEditar}
+                    />
+
+                    <Route
+                      exact
+                      path="/Categorias"
+                      component={CategoriasTable}
+                    />
+                    <Route
+                      exact
+                      path="/Categorias/:id"
+                      component={EditarCategoria}
+                    />
+                    <Route
+                      exact
+                      path="/Subcategorias"
+                      component={SubcategoriasTable}
+                    />
+
+                    <Route
+                      exact
+                      path="/Subcategorias/:id"
+                      component={EditarSubcategoria}
+                    />
+                    <Route
+                      exact
+                      path="/Localidades"
+                      component={LocalidadesTable}
+                    />
+                    <Route
+                      exact
+                      path="/Localidades/:id"
+                      component={EditarLocalidad}
+                    />
+
+                    <Route exact path="/Perfil" component={Perfil} />
+                  </Switch>
+                </div>
+              </div>
+            </div>
+            <Footer />
+          </div>
+        </div>
+        <a className="scroll-to-top rounded" href="#page-top">
+          <i className="fas fa-angle-up"></i>
         </a>
-      </header>
-    </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
