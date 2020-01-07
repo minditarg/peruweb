@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Modal from "../Modal/Modal";
 import { NavLink } from "react-router-dom";
+import Table from "../Tables/Tables";
 class ProveedoresTable extends Component {
   render() {
     return (
@@ -11,59 +12,12 @@ class ProveedoresTable extends Component {
           </div>
           <div className="card-body">
             <div className="table-responsive">
-              <table
-                className="table table-bordered"
-                id="dataTable"
-                width="100%"
-                cellSpacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>Proveedor</th>
-                    <th>Mail</th>
-                    <th>Tel</th>
-                    <th>Localidad</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Proveedor</th>
-                    <th>Mail</th>
-                    <th>Tel</th>
-                    <th>Localidad</th>
-                    <th>Dirección</th>
-                    <th>Acciones</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    <td>Airi Satou</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>33</td>
-                    <td>2008/11/28</td>
-                    <td>
-                      <NavLink
-                        to="/Proveedores/:3"
-                        className="btn btn-warning btn-circle btn-sm
-                        ActionButton"
-                      >
-                        <i className="fa fa-edit"></i>
-                      </NavLink>
-                      <a
-                        href="#."
-                        data-toggle="modal"
-                        data-target="#eliminar"
-                        className="btn btn-danger btn-circle btn-sm ActionButton"
-                      >
-                        <i className="fa fa-trash"></i>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <Table
+                data={this.dataSet}
+                columns={this.tableColumns}
+                editable
+                eliminable
+              ></Table>
             </div>
           </div>
         </div>
@@ -71,5 +25,304 @@ class ProveedoresTable extends Component {
       </div>
     );
   }
+  tableColumns = [
+    { title: "Proveedor" },
+    { title: "Mail" },
+    { title: "Telefono" },
+    { title: "Direccion" },
+    { title: "Localidad" },
+    { title: "Tipo" }
+  ];
+
+  dataSet = [
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ],
+    [
+      "Garrett Winters",
+      "mail@mail.com",
+      "221560525",
+      "1 142 3558",
+      "La plata",
+      "Premium"
+    ]
+  ];
 }
 export default ProveedoresTable;

@@ -1,7 +1,19 @@
 import React, { Component } from "react";
 import Modal from "../Modal/Modal";
 import { NavLink } from "react-router-dom";
+
+const $ = require("jquery");
+$.DataTable = require("datatables.net");
 class CategoriasTable extends Component {
+  constructor() {
+    super();
+  }
+
+  componentDidMount() {
+    this.$el = $(this.el);
+    this.$el.DataTable({});
+  }
+
   render() {
     return (
       <div className="col-xl-12 col-lg-12">
@@ -16,6 +28,7 @@ class CategoriasTable extends Component {
                 id="dataTable"
                 width="100%"
                 cellSpacing="0"
+                ref={el => (this.el = el)}
               >
                 <thead>
                   <tr>
@@ -36,21 +49,25 @@ class CategoriasTable extends Component {
                     <td>Airi Satou</td>
 
                     <td>
-                      <NavLink
-                        to="/Categorias/:3"
-                        className="btn btn-warning btn-circle btn-sm
+                      {this.props.editable && (
+                        <NavLink
+                          to="/Categorias/:3"
+                          className="btn btn-warning btn-circle btn-sm
                         ActionButton"
-                      >
-                        <i className="fa fa-edit"></i>
-                      </NavLink>
-                      <a
-                        href="#."
-                        data-toggle="modal"
-                        data-target="#eliminar"
-                        className="btn btn-danger btn-circle btn-sm ActionButton"
-                      >
-                        <i className="fa fa-trash"></i>
-                      </a>
+                        >
+                          <i className="fa fa-edit"></i>
+                        </NavLink>
+                      )}
+                      {this.props.eliminable && (
+                        <a
+                          href="#."
+                          data-toggle="modal"
+                          data-target="#eliminar"
+                          className="btn btn-danger btn-circle btn-sm ActionButton"
+                        >
+                          <i className="fa fa-trash"></i>
+                        </a>
+                      )}
                     </td>
                   </tr>
                 </tbody>
