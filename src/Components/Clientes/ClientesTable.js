@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-
 import Modal from "../Modal/Modal";
-import { NavLink } from "react-router-dom";
+import Table from "../Tables/Tables";
 class ClientesTable extends Component {
   render() {
     return (
@@ -12,53 +11,12 @@ class ClientesTable extends Component {
           </div>
           <div className="card-body">
             <div className="table-responsive">
-              <table
-                className="table table-bordered"
-                id="dataTable"
-                width="100%"
-                cellSpacing="0"
-              >
-                <thead>
-                  <tr>
-                    <th>Cliente</th>
-                    <th>Mail</th>
-
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Cliente</th>
-                    <th>Mail</th>
-
-                    <th>Acciones</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    <td>Airi Satou</td>
-                    <td>Accountant</td>
-
-                    <td>
-                      <NavLink
-                        to="/Clientes/:3"
-                        className="btn btn-warning btn-circle btn-sm
-                        ActionButton"
-                      >
-                        <i className="fa fa-edit"></i>
-                      </NavLink>
-                      <a
-                        href="#."
-                        data-toggle="modal"
-                        data-target="#eliminar"
-                        className="btn btn-danger btn-circle btn-sm ActionButton"
-                      >
-                        <i className="fa fa-trash"></i>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <Table
+                data={this.dataSet}
+                columns={this.tableColumns}
+                editable
+                eliminable
+              ></Table>
             </div>
           </div>
         </div>
@@ -66,5 +24,12 @@ class ClientesTable extends Component {
       </div>
     );
   }
+
+  tableColumns = [{ title: "Cliente" }, { title: "Mail" }];
+
+  dataSet = [
+    ["Garrett Winters", "mail@mail.com"],
+    ["Garrett Winters", "mail@mail.com"]
+  ];
 }
 export default ClientesTable;

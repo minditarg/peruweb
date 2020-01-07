@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Modal from "../Modal/Modal";
-import { NavLink } from "react-router-dom";
 import Table from "../Tables/Tables";
 class ProveedoresTable extends Component {
   render() {

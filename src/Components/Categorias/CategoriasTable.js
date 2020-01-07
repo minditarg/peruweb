@@ -1,17 +1,9 @@
 import React, { Component } from "react";
 import Modal from "../Modal/Modal";
-import { NavLink } from "react-router-dom";
-
-const $ = require("jquery");
-$.DataTable = require("datatables.net");
+import Table from "../Tables/Tables";
 class CategoriasTable extends Component {
   constructor() {
     super();
-  }
-
-  componentDidMount() {
-    this.$el = $(this.el);
-    this.$el.DataTable({});
   }
 
   render() {
@@ -23,55 +15,12 @@ class CategoriasTable extends Component {
           </div>
           <div className="card-body">
             <div className="table-responsive">
-              <table
-                className="table table-bordered"
-                id="dataTable"
-                width="100%"
-                cellSpacing="0"
-                ref={el => (this.el = el)}
-              >
-                <thead>
-                  <tr>
-                    <th>Categoria</th>
-
-                    <th>Acciones</th>
-                  </tr>
-                </thead>
-                <tfoot>
-                  <tr>
-                    <th>Categoria</th>
-
-                    <th>Acciones</th>
-                  </tr>
-                </tfoot>
-                <tbody>
-                  <tr>
-                    <td>Airi Satou</td>
-
-                    <td>
-                      {this.props.editable && (
-                        <NavLink
-                          to="/Categorias/:3"
-                          className="btn btn-warning btn-circle btn-sm
-                        ActionButton"
-                        >
-                          <i className="fa fa-edit"></i>
-                        </NavLink>
-                      )}
-                      {this.props.eliminable && (
-                        <a
-                          href="#."
-                          data-toggle="modal"
-                          data-target="#eliminar"
-                          className="btn btn-danger btn-circle btn-sm ActionButton"
-                        >
-                          <i className="fa fa-trash"></i>
-                        </a>
-                      )}
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <Table
+                data={this.dataSet}
+                columns={this.tableColumns}
+                editable
+                eliminable
+              ></Table>
             </div>
           </div>
         </div>
@@ -79,5 +28,9 @@ class CategoriasTable extends Component {
       </div>
     );
   }
+
+  tableColumns = [{ title: "Categoria" }];
+
+  dataSet = [["Garrett Winters"], ["Garrett Winters"]];
 }
 export default CategoriasTable;
