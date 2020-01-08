@@ -18,6 +18,7 @@ import SubcategoriasTable from "./Components/Subcategorias/SubcategoriasTable";
 import EditarSubcategoria from "./Components/Subcategorias/EditarSubcategoria";
 import LocalidadesTable from "./Components/Localidades/LocalidadesTable";
 import EditarLocalidad from "./Components/Localidades/EditarLocalidad";
+import ScGral from "./assets/scriptGral";
 function App() {
   return (
     <BrowserRouter>
@@ -88,10 +89,12 @@ function App() {
             <Footer />
           </div>
         </div>
-        <a className="scroll-to-top rounded" href="#page-top">
+        <a className="scrolltop" href="#page-top">
           <i className="fas fa-angle-up"></i>
         </a>
       </div>
+
+      <ScGral></ScGral>
     </BrowserRouter>
   );
 }

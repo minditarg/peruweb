@@ -1,18 +1,70 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import ReactDOM from "react-dom";
 const $ = require("jquery");
 $.DataTable = require("datatables.net");
 
 class Table extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  editarBtn(td, cellData) {
+    ReactDOM.render(
+      <a
+        onClick={() => this.props.editar(cellData[0])}
+        className="btn btn-warning btn-circle btn-sm ActionButton white"
+      >
+        <i className="fa fa-edit"></i>
+      </a>,
+      td
+    );
+  }
+
+  eliminarBtn(td, cellData) {
+    ReactDOM.render(
+      <a
+        data-toggle="modal"
+        data-target="#eliminar"
+        className="btn btn-danger btn-circle btn-sm ActionButton white"
+      >
+        <i className="fa fa-trash"></i>
+      </a>,
+      td
+    );
+  }
+  ambosBtns(td, cellData) {
+    ReactDOM.render(
+      <span>
+        <a
+          onClick={() => this.props.editar(cellData[0])}
+          className="btn btn-warning btn-circle btn-sm ActionButton white"
+        >
+          <i className="fa fa-edit"></i>
+        </a>
+        <a
+          data-toggle="modal"
+          data-target="#eliminar"
+          className="btn btn-danger btn-circle btn-sm ActionButton white"
+        >
+          <i className="fa fa-trash"></i>
+        </a>
+      </span>,
+      td
+    );
+  }
+
   componentDidMount() {
     let columnas = this.props.columns;
     if (this.props.editable && !this.props.eliminable) {
       columnas = [
         ...this.props.columns,
         {
+          title: "Acciones",
           mData: null,
           bSortable: false,
-          mRender: function(data, type, full) {
-            return '<a href="/Categorias/:3" class="btn btn-warning btn-circle btn-sm ActionButton"><i class="fa fa-edit"></i></a>';
+          createdCell: (td, cellData) => {
+            this.editarBtn(td, cellData);
           }
         }
       ];
@@ -20,10 +72,11 @@ class Table extends Component {
       columnas = [
         ...this.props.columns,
         {
+          title: "Acciones",
           mData: null,
           bSortable: false,
-          mRender: function(data, type, full) {
-            return '<a href="#." data-toggle="modal" data-target="#eliminar" class="btn btn-danger btn-circle btn-sm ActionButton" > <i class="fa fa-trash"></i> </a>';
+          createdCell: (td, cellData) => {
+            this.eliminarBtn(td, cellData);
           }
         }
       ];
@@ -31,13 +84,11 @@ class Table extends Component {
       columnas = [
         ...this.props.columns,
         {
-          mData: "null",
+          title: "Acciones",
+          mData: null,
           bSortable: false,
-          mRender: function(data, type, full) {
-            return (
-              '<a href="/Categorias/:3" class="btn btn-warning btn-circle btn-sm ActionButton"><i class="fa fa-edit"></i></a>' +
-              '<a href="#." data-toggle="modal" data-target="#eliminar" class="btn btn-danger btn-circle btn-sm ActionButton" > <i class="fa fa-trash"></i> </a>'
-            );
+          createdCell: (td, cellData) => {
+            this.ambosBtns(td, cellData);
           }
         }
       ];

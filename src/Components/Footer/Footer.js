@@ -9,6 +9,7 @@ class Footer extends Component {
             <span>Copyright &copy; Your Website 2019</span>
           </div>
         </div>
+        <script src="../../assets/js/sb-admin-2.js"></script>
       </footer>
     );
   }

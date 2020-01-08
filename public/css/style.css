@@ -519,6 +519,27 @@ table.dataTable td {
     height: 0
 }
 
+.white {
+    color: white !important;
+}
+
+.ActionButton {
+    cursor: pointer;
+}
+
+.scrolltop {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(90, 92, 105, .5);
+    line-height: 46px;
+    border-radius: .35rem !important;
+}
+
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,
     .dataTables_wrapper .dataTables_paginate {

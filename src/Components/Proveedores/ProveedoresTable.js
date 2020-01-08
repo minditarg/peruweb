@@ -1,13 +1,25 @@
 import React, { Component } from "react";
 import Modal from "../Modal/Modal";
 import Table from "../Tables/Tables";
+
+import { NavLink } from "react-router-dom";
 class ProveedoresTable extends Component {
   render() {
+    console.log(this.props);
     return (
       <div className="col-xl-12 col-lg-12">
         <div className="card shadow mb-4">
           <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 className="m-0 font-weight-bold text-primary">Proveedores </h6>
+            <h6 className="m-0 font-weight-bold text-primary">Proveedores</h6>
+            <NavLink
+              to="/addProvedor"
+              className="btn btn-primary btn-icon-split"
+            >
+              <span className="icon text-white-50">
+                <i className="fas fa-plus"></i>
+              </span>
+              <span className="text">Nuevo Proveedor</span>
+            </NavLink>
           </div>
           <div className="card-body">
             <div className="table-responsive">
@@ -16,6 +28,8 @@ class ProveedoresTable extends Component {
                 columns={this.tableColumns}
                 editable
                 eliminable
+                router={this.props.router}
+                editar={e => this.props.history.push("/Proveedores/" + e)}
               ></Table>
             </div>
           </div>
