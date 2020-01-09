@@ -1,54 +1,92 @@
-import React, { Component } from "react";
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import Select from "../Select/Select";
 
-class EditarSubcategoria extends Component {
-  render() {
-    return (
-      <div className="col-xl-12 col-lg-12">
-        <div className="card shadow mb-4">
-          <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 className="m-0 font-weight-bold text-primary">Subcategoria </h6>
-          </div>
-          <div className="card-body">
-            <form className="user">
-              <div className="form-group row">
-                <div className="col-sm-6 offset-md-3 mb-3 mb-sm-0">
-                  <input
-                    type="text"
-                    className="form-control form-control-user"
-                    id="exampleFirstName"
-                    placeholder="Nombre"
-                  />
-                </div>
-              </div>
+const EditarSubcategoria = () => {
+  const formik = useFormik({
+    initialValues: {
+      Categoria: "",
+      Subcategoria: ""
+    },
+    validationSchema: Yup.object({
+      Categoria: Yup.string().required("Obligatorio"),
+      Subcategoria: Yup.string()
+        .min(3, "La Subcategoria tiene que tener al menos 3 caracteres")
+        .required("Obligatorio")
+    }),
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    }
+  });
 
-              <div className="form-group row">
-                <div className=" col-sm-6 offset-md-3">
-                  <input
-                    type="email"
-                    className="form-control form-control-user"
-                    id="exampleInputEmail"
-                    placeholder="Email Address"
-                  />
-                </div>
-              </div>
+  const OpCategorias = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" }
+  ];
 
-              <div className="form-group row">
-                <div className="col-sm-3 offset-md-3">
-                  <a href="#" className="btn btn-danger btn-user btn-block">
-                    Cancelar
-                  </a>
-                </div>
-                <div className="col-sm-3 ">
-                  <a href="#" className="btn btn-primary btn-user btn-block">
-                    Aceptar
-                  </a>
-                </div>
+  return (
+    <div className="col-xl-12 col-lg-12">
+      <div className="card shadow mb-4">
+        <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 className="m-0 font-weight-bold text-primary">Subcategoria </h6>
+        </div>
+        <div className="card-body">
+          <form className="user" onSubmit={formik.handleSubmit}>
+            <div className="form-group row">
+              <div className="col-sm-6 offset-md-3 mb-3 mb-sm-0">
+                <Select
+                  idselect="Categoria"
+                  options={OpCategorias}
+                  value={formik.values.Categoria}
+                  onChange={formik.setFieldValue}
+                  onBlur={formik.setFieldTouched}
+                  error={formik.errors.topics}
+                  touched={formik.touched.topics}
+                />
+                {formik.touched.Categoria && formik.errors.Categoria ? (
+                  <div>{formik.errors.Categoria}</div>
+                ) : null}
               </div>
-            </form>
-          </div>
+            </div>
+            <div className="form-group row">
+              <div className=" col-sm-6 offset-md-3">
+                <input
+                  className="form-control form-control-user"
+                  placeholder="Subcategoria"
+                  id="Subcategoria"
+                  name="Subcategoria"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Subcategoria}
+                />
+                {formik.touched.Subcategoria && formik.errors.Subcategoria ? (
+                  <div>{formik.errors.Subcategoria}</div>
+                ) : null}
+              </div>
+            </div>
+            <div className="form-group row">
+              <div className="col-sm-3 offset-md-3">
+                <a href="#" className="btn btn-danger btn-user btn-block">
+                  Cancelar
+                </a>
+              </div>
+              <div className="col-sm-3 ">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-user btn-block"
+                >
+                  Aceptar
+                </button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
 export default EditarSubcategoria;

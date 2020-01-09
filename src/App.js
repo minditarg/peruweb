@@ -41,14 +41,12 @@ function App() {
                       path="/Proveedores/:id"
                       component={Proveedor}
                     />
-
                     <Route exact path="/Clientes" component={ClientesTable} />
                     <Route
                       exact
                       path="/Clientes/:id"
                       component={ClienteEditar}
                     />
-
                     <Route
                       exact
                       path="/Categorias"
@@ -64,7 +62,6 @@ function App() {
                       path="/Subcategorias"
                       component={SubcategoriasTable}
                     />
-
                     <Route
                       exact
                       path="/Subcategorias/:id"
@@ -80,8 +77,8 @@ function App() {
                       path="/Localidades/:id"
                       component={EditarLocalidad}
                     />
-
-                    <Route exact path="/Perfil" component={Perfil} />
+                    <Route exact path="/Perfil" component={Perfil} />{" "}
+                    <Route path="/" component={ProveedoresTable} />
                   </Switch>
                 </div>
               </div>
