@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import logo from "../../assets/img/icono.png";
 class Menu extends Component {
   render() {
     return (
@@ -7,17 +8,17 @@ class Menu extends Component {
         className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
         id="accordionSidebar"
       >
-        <a
+        <NavLink
+          to="/"
           className="sidebar-brand d-flex align-items-center justify-content-center"
-          href="index.html"
         >
-          <div className="sidebar-brand-icon rotate-n-15">
-            <i className="fas fa-laugh-wink"></i>
+          <div className="sidebar-brand-icon">
+            <img src={logo} alt="logo" style={{ borderRadius: "100%" }} />
           </div>
           <div className="sidebar-brand-text mx-3">
             Construcciones y soluciones
           </div>
-        </a>
+        </NavLink>
         <hr className="sidebar-divider" />
         <div className="sidebar-heading">Usuarios</div>
         <li className="nav-item">

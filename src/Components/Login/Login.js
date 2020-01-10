@@ -3,6 +3,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
 
+import { connect } from "react-redux";
+import { LOAD_TOKEN_USER } from "../../Actions/actionsTypes";
+import * as session from "../../Services/session";
+import * as api from "../../Services/api";
+
 import "./login.css";
 const Login = () => {
   const formik = useFormik({
@@ -17,6 +22,37 @@ const Login = () => {
       Pass: Yup.string().required("Obligatorio")
     }),
     onSubmit: values => {
+      session
+        .authenticate(values.Mail, values.Pass)
+        .then(response => {
+          if (response.statusType == "success") {
+            let email = values.Mail;
+            if (session.esUsuarioTipoCliente()) alert("es cliente");
+            else if (
+              session.esUsuarioTipoEmpresa() &&
+              session.usuarioLogueado().Proveedor != null
+            )
+              alert("es Empresa");
+          } else {
+            if (response.error) {
+              alert(response.error);
+            } else {
+              alert(response.message);
+            }
+          }
+        })
+        .catch(exception => {
+          const error = api.exceptionExtractError(exception);
+          /*this.setState({
+            isLoading: false,
+            ...(error ? { error } : {})
+          });*/
+          alert(exception);
+          if (!error) {
+            throw exception;
+          }
+        });
+
       alert(JSON.stringify(values, null, 2));
     }
   });

@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ReactDOM from "react-dom";
 const $ = require("jquery");
 $.DataTable = require("datatables.net");
 
 class Table extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   editarBtn(td, cellData) {
     ReactDOM.render(
       <a

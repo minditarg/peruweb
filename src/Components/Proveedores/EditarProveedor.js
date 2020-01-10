@@ -181,9 +181,9 @@ const EditarProveedor = () => {
 
             <div className="form-group row">
               <div className="col-sm-3 offset-md-3">
-                <a href="#" className="btn btn-danger btn-user btn-block">
+                <button className="btn btn-danger btn-user btn-block">
                   Cancelar
-                </a>
+                </button>
               </div>
               <div className="col-sm-3 ">
                 <button
