@@ -46,7 +46,7 @@ const EditarSubcategoria = () => {
                   touched={formik.touched.topics}
                 />
                 {formik.touched.Categoria && formik.errors.Categoria ? (
-                  <div>{formik.errors.Categoria}</div>
+                  <div className="formError">{formik.errors.Categoria}</div>
                 ) : null}
               </div>
             </div>
@@ -63,7 +63,7 @@ const EditarSubcategoria = () => {
                   value={formik.values.Subcategoria}
                 />
                 {formik.touched.Subcategoria && formik.errors.Subcategoria ? (
-                  <div>{formik.errors.Subcategoria}</div>
+                  <div className="formError">{formik.errors.Subcategoria}</div>
                 ) : null}
               </div>
             </div>

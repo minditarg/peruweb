@@ -66,7 +66,7 @@ const EditarProveedor = () => {
                   value={formik.values.Nombre}
                 />
                 {formik.touched.Nombre && formik.errors.Nombre ? (
-                  <div>{formik.errors.Nombre}</div>
+                  <div className="formError">{formik.errors.Nombre}</div>
                 ) : null}
               </div>
             </div>
@@ -84,7 +84,7 @@ const EditarProveedor = () => {
                   value={formik.values.Mail}
                 />
                 {formik.touched.Mail && formik.errors.Mail ? (
-                  <div>{formik.errors.Mail}</div>
+                  <div className="formError">{formik.errors.Mail}</div>
                 ) : null}
               </div>
             </div>
@@ -101,7 +101,7 @@ const EditarProveedor = () => {
                   value={formik.values.Telefono}
                 />
                 {formik.touched.Telefono && formik.errors.Telefono ? (
-                  <div>{formik.errors.Telefono}</div>
+                  <div className="formError">{formik.errors.Telefono}</div>
                 ) : null}
               </div>
             </div>
@@ -117,7 +117,7 @@ const EditarProveedor = () => {
                   touched={formik.touched.topics}
                 />
                 {formik.touched.Localidad && formik.errors.Localidad ? (
-                  <div>{formik.errors.Localidad}</div>
+                  <div className="formError">{formik.errors.Localidad}</div>
                 ) : null}
               </div>
             </div>
@@ -134,7 +134,7 @@ const EditarProveedor = () => {
                   value={formik.values.Direccion}
                 />
                 {formik.touched.Direccion && formik.errors.Direccion ? (
-                  <div>{formik.errors.Direccion}</div>
+                  <div className="formError">{formik.errors.Direccion}</div>
                 ) : null}
               </div>
             </div>
@@ -151,7 +151,7 @@ const EditarProveedor = () => {
                   value={formik.values.Descripcion}
                 />
                 {formik.touched.Descripcion && formik.errors.Descripcion ? (
-                  <div>{formik.errors.Descripcion}</div>
+                  <div className="formError">{formik.errors.Descripcion}</div>
                 ) : null}
               </div>
             </div>
@@ -167,7 +167,7 @@ const EditarProveedor = () => {
                   touched={formik.touched.topics}
                 />
                 {formik.touched.Tipo && formik.errors.Tipo ? (
-                  <div>{formik.errors.Tipo}</div>
+                  <div className="formError">{formik.errors.Tipo}</div>
                 ) : null}
               </div>
             </div>

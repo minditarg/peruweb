@@ -43,7 +43,7 @@ const EditarCliente = () => {
                   value={formik.values.Mail}
                 />
                 {formik.touched.Mail && formik.errors.Mail ? (
-                  <div>{formik.errors.Mail}</div>
+                  <div className="formError">{formik.errors.Mail}</div>
                 ) : null}
               </div>
             </div>
@@ -61,7 +61,7 @@ const EditarCliente = () => {
                   value={formik.values.Nombre}
                 />
                 {formik.touched.Nombre && formik.errors.Nombre ? (
-                  <div>{formik.errors.Nombre}</div>
+                  <div className="formError">{formik.errors.Nombre}</div>
                 ) : null}
               </div>
             </div>

@@ -37,7 +37,7 @@ const EditarCategoria = () => {
                   value={formik.values.Categoria}
                 />
                 {formik.touched.Categoria && formik.errors.Categoria ? (
-                  <div>{formik.errors.Categoria}</div>
+                  <div className="formError">{formik.errors.Categoria}</div>
                 ) : null}
               </div>
             </div>

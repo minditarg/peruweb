@@ -39,7 +39,7 @@ const EditarLocalidad = () => {
                 value={formik.values.Localidad}
               />
               {formik.touched.Localidad && formik.errors.Localidad ? (
-                <div>{formik.errors.Localidad}</div>
+                <div className="formError">{formik.errors.Localidad}</div>
               ) : null}
             </div>
           </div>

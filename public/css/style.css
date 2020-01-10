@@ -540,6 +540,10 @@ table.dataTable td {
     border-radius: .35rem !important;
 }
 
+.formError {
+    color: red;
+}
+
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,
     .dataTables_wrapper .dataTables_paginate {
