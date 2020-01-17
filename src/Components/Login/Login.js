@@ -4,11 +4,9 @@ import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { LOAD_TOKEN_USER } from "../../Actions/actionsTypes";
-import * as session from "../../Services/session";
-import * as api from "../../Services/api";
 
 import "./login.css";
+
 const Login = () => {
   const formik = useFormik({
     initialValues: {
@@ -22,7 +20,7 @@ const Login = () => {
       Pass: Yup.string().required("Obligatorio")
     }),
     onSubmit: values => {
-      session
+      /* session
         .authenticate(values.Mail, values.Pass)
         .then(response => {
           if (response.statusType == "success") {
@@ -47,13 +45,15 @@ const Login = () => {
             isLoading: false,
             ...(error ? { error } : {})
           });*/
-          alert(exception);
+      /* alert(exception);
           if (!error) {
             throw exception;
           }
-        });
+        }
+        
+        );
 
-      alert(JSON.stringify(values, null, 2));
+      alert(JSON.stringify(values, null, 2));*/
     }
   });
 

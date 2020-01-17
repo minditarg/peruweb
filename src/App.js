@@ -20,13 +20,24 @@ import EditarLocalidad from "./Components/Localidades/EditarLocalidad";
 import ScGral from "./assets/scriptGral";
 import Login from "./Components/Login/Login";
 import Olvide from "./Components/Login/Olvide";
-import * as session from "./Services/session";
 
 import { connect } from "react-redux";
 
+import Fetch from "./Funciones/Helper";
+import { Login as loginfx, Logout as logoutFx } from "./Redux/Acciones/Usuario";
 class App extends Component {
+  componentDidMount() {
+    debugger;
+    Fetch(
+      "/loginWeb",
+      loginfx,
+      { email: "lcanavery@gmail.com", password: "123456" },
+      "post"
+    );
+  }
+
   render() {
-    let logueado = this.props.usuario; //this.props.usuario;
+    let logueado = false; //this.props.usuario; //this.props.usuario;
     if (logueado) {
       return (
         <BrowserRouter>
@@ -119,9 +130,6 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
-  console.log(session);
-  return {
-    usuario: session.estaLogueado
-  };
+  return state;
 };
 export default connect(mapStateToProps)(App);

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
-import * as session from "../../Services/session";
-import * as proveedorService from "../../Services/proveedor";
-import * as commonService from "../../Services/common";
 import { connect } from "react-redux";
 //"./Services/session";
 
@@ -51,7 +48,7 @@ class Header extends Component {
                 className="dropdown-item"
                 onClick={() => {
                   debugger;
-                  this.props.session.logout();
+                  //  this.props.session.logout();
                 }}
               >
                 <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -67,9 +64,9 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    session: session,
+    /*  session: session,
     provService: proveedorService,
-    localidades: commonService.getStore().localidades
+    localidades: commonService.getStore().localidades*/
   };
 };
 export default connect(mapStateToProps)(Header);
