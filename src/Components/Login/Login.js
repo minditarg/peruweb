@@ -2,9 +2,9 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { NavLink } from "react-router-dom";
-
 import { connect } from "react-redux";
-
+import { fetchApi } from "../../Redux/Acciones/Fetch";
+import store from "../../Redux/Store";
 import "./login.css";
 
 const Login = () => {
@@ -20,40 +20,17 @@ const Login = () => {
       Pass: Yup.string().required("Obligatorio")
     }),
     onSubmit: values => {
-      /* session
-        .authenticate(values.Mail, values.Pass)
-        .then(response => {
-          if (response.statusType == "success") {
-            let email = values.Mail;
-            if (session.esUsuarioTipoCliente()) alert("es cliente");
-            else if (
-              session.esUsuarioTipoEmpresa() &&
-              session.usuarioLogueado().Proveedor != null
-            )
-              alert("es Empresa");
-          } else {
-            if (response.error) {
-              alert(response.error);
-            } else {
-              alert(response.message);
-            }
-          }
-        })
-        .catch(exception => {
-          const error = api.exceptionExtractError(exception);
-          /*this.setState({
-            isLoading: false,
-            ...(error ? { error } : {})
-          });*/
-      /* alert(exception);
-          if (!error) {
-            throw exception;
-          }
-        }
-        
-        );
-
-      alert(JSON.stringify(values, null, 2));*/
+      store
+        .dispatch(
+          fetchApi(
+            ["login", "Salir"],
+            "/loginWeb",
+            { email: values.Mail, password: values.Pass },
+            "post",
+            false
+          )
+        )
+        .then(() => console.log(store.getState()));
     }
   });
 
@@ -128,4 +105,8 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
+const mapStateToProps = state => {
+  console.log(state);
+  return state;
+};
+export default connect(mapStateToProps)(Login);

@@ -1,18 +1,6 @@
-export const Pendiente = data => {
-  return {
-    type: "pendiente",
-    payload: data
-  };
-};
-export const Err = err => {
-  return {
-    type: "error",
-    payload: err
-  };
-};
-export const Initial = data => {
-  return {
-    type: "init",
-    payload: data
-  };
+const config = {
+  // url: 'http://50.63.166.215:5001/api',
+  // pathFiles: 'http://50.63.166.215:5001/uploads/',
+  url: "http://10.30.30.125:3001/api",
+  pathFiles: "http://10.30.30.125:3001/uploads/"
 };

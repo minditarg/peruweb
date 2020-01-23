@@ -1,4 +1,6 @@
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+
 import User from "./Reducers/User";
 import Empresas from "./Reducers/Empresas";
 import Clientes from "./Reducers/Clientes";
@@ -29,6 +31,6 @@ const reducer = combineReducers({
   Localidad
 });
 
-const Store = createStore(reducer);
+const Store = createStore(reducer, applyMiddleware(thunk));
 
 export default Store;

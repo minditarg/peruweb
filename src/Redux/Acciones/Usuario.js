@@ -6,7 +6,6 @@ export const Login = user => {
 };
 export const Logout = user => {
   return {
-    type: "logout",
-    payload: user
+    type: "logout"
   };
 };
