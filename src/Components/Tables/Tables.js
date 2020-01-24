@@ -7,7 +7,7 @@ class Table extends Component {
   editarBtn(td, cellData) {
     ReactDOM.render(
       <a
-        onClick={() => this.props.editar(cellData[0])}
+        onClick={() => this.props.editar(cellData)}
         className="btn btn-warning btn-circle btn-sm ActionButton white"
       >
         <i className="fa fa-edit"></i>
@@ -19,6 +19,7 @@ class Table extends Component {
   eliminarBtn(td, cellData) {
     ReactDOM.render(
       <a
+        onClick={() => this.props.eliminar(cellData)}
         data-toggle="modal"
         data-target="#eliminar"
         className="btn btn-danger btn-circle btn-sm ActionButton white"
@@ -32,12 +33,13 @@ class Table extends Component {
     ReactDOM.render(
       <span>
         <a
-          onClick={() => this.props.editar(cellData[0])}
+          onClick={() => this.props.editar(cellData)}
           className="btn btn-warning btn-circle btn-sm ActionButton white"
         >
           <i className="fa fa-edit"></i>
         </a>
         <a
+          onClick={() => this.props.eliminar(cellData)}
           data-toggle="modal"
           data-target="#eliminar"
           className="btn btn-danger btn-circle btn-sm ActionButton white"

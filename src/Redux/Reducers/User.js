@@ -7,7 +7,11 @@ function reducer(state = initialState, { type, payload }) {
       return initialState;
     case "login":
       return {
-        token: payload.data.tokens,
+        token: payload.data.tokens
+      };
+    case "GET_DATA":
+      return {
+        ...state,
         user: payload
       };
     case "Salir":

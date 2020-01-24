@@ -1,4 +1,5 @@
 import fetch from "cross-fetch";
+import store from "../Store";
 const config = {
   // url: 'http://50.63.166.215:5001/api',
   // pathFiles: 'http://50.63.166.215:5001/uploads/',
@@ -15,8 +16,7 @@ function fetching() {
 export const SUCCES = "SUCCES";
 function succes(data) {
   return {
-    type: SUCCES,
-    data: data
+    type: SUCCES
   };
 }
 export const FAIL = "FAIL";
@@ -34,7 +34,7 @@ export function fetchApi(
   metodo = "get",
   multipart = false
 ) {
-  const accessToken = "";
+  const accessToken = store.getState().User.token;
   return function(dispatch) {
     dispatch(fetching());
 
@@ -65,11 +65,9 @@ export function fetchApi(
         return res.json();
       })
       .then(result => {
-        console.log(result);
         if (result.statusCode >= 400) {
           throw new Error(result.message);
         }
-
         actionDispatch.forEach(element => {
           dispatch({
             type: element,
@@ -77,10 +75,10 @@ export function fetchApi(
           });
         });
       })
-
       .catch(error => {
         console.log(error);
         dispatch(fail(error));
+        return error;
       });
   };
 }

@@ -11,10 +11,9 @@ function App(state = initialState, action) {
     case FETCHING:
       return { isLoading: true, error: null };
     case SUCCES:
-      return { isLoading: false, error: action.payload };
+      return { isLoading: false, error: null };
     case FAIL:
-      console.log(action);
-      return { isLoading: "gat", error: action.error };
+      return { isLoading: false, error: action.error.toString() };
     default:
       return state;
   }

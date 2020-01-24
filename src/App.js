@@ -28,16 +28,6 @@ class App extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
-    // this.props.dispatch(fetchProducts());
-    /* alert("0ad");
-    Fetch(
-      "/loginWeb",
-      loginfx,
-      { email: "lcanavery@gmail.com", password: "123456" },
-      "post"
-    );*/
-  }
 
   render() {
     let logueado = this.props.user ? this.props.user.token : false; //this.props.usuario; //this.props.usuario;
@@ -135,6 +125,7 @@ class App extends Component {
   }
 }
 const mapStateToProps = state => {
-  return { user: state.user };
+  console.log(state);
+  return { user: state.User };
 };
 export default connect(mapStateToProps)(App);

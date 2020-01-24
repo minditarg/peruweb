@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { connect } from "react-redux";
+import store from "../../Redux/Store";
+
 //"./Services/session";
 
 class Header extends Component {
@@ -47,7 +49,9 @@ class Header extends Component {
               <button
                 className="dropdown-item"
                 onClick={() => {
-                  debugger;
+                  store.dispatch({
+                    type: "logout"
+                  });
                   //  this.props.session.logout();
                 }}
               >

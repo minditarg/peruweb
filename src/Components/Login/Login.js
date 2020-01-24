@@ -20,17 +20,15 @@ const Login = () => {
       Pass: Yup.string().required("Obligatorio")
     }),
     onSubmit: values => {
-      store
-        .dispatch(
-          fetchApi(
-            ["login", "Salir"],
-            "/loginWeb",
-            { email: values.Mail, password: values.Pass },
-            "post",
-            false
-          )
+      store.dispatch(
+        fetchApi(
+          ["login"],
+          "/loginWeb",
+          { email: values.Mail, password: values.Pass },
+          "post",
+          false
         )
-        .then(() => console.log(store.getState()));
+      );
     }
   });
 
@@ -106,7 +104,6 @@ const Login = () => {
   );
 };
 const mapStateToProps = state => {
-  console.log(state);
   return state;
 };
 export default connect(mapStateToProps)(Login);

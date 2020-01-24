@@ -4,7 +4,7 @@ class Modal extends Component {
   render() {
     return (
       <div
-        className="modal fade"
+        className={"modal fade " + (this.props.show ? "modal-open show" : "")}
         id={this.props.modalId}
         tabIndex="-1"
         role="dialog"
@@ -15,7 +15,7 @@ class Modal extends Component {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Eliminar {this.props.nombre}
+                Eliminar
               </h5>
               <button
                 className="close"
@@ -27,7 +27,7 @@ class Modal extends Component {
               </button>
             </div>
             <div className="modal-body">
-              Desea eliminar el proveedor "nombreDelProveedor?.
+              Desea eliminar el proveedor {this.props.seleccionado}.
             </div>
             <div className="modal-footer">
               <button
@@ -37,9 +37,12 @@ class Modal extends Component {
               >
                 Cancelar
               </button>
-              <a className="btn btn-primary" href="login.html">
+              <button
+                className="btn btn-primary"
+                onClick={() => this.props.aceptar()}
+              >
                 Si, eliminalo
-              </a>
+              </button>
             </div>
           </div>
         </div>
