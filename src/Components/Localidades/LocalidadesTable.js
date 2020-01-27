@@ -12,6 +12,13 @@ class LocalidadesTable extends Component {
       fetchApi(["GET_DATA_LOCALIDADES", "SUCCES"], "/localidades")
     );
   }
+  selectLocalidad(localidad) {
+    store.dispatch({
+      type: "SELECT_LOCALIDAD",
+      payload: localidad
+    });
+    this.props.history.push("/Localidades/" + localidad.id);
+  }
   render() {
     if (this.props.App.isLoading) {
       return (
@@ -64,7 +71,7 @@ class LocalidadesTable extends Component {
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Localidades/" + e)}
+                  editar={e => this.selectLocalidad(e)}
                 ></Table>
               </div>
             </div>

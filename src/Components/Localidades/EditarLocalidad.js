@@ -1,12 +1,16 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { connect } from "react-redux";
+import store from "../../Redux/Store";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
+
 // A custom validation function. This must return an object
 // which keys are symmetrical to our values/initialValues
-const EditarLocalidad = () => {
+const EditarLocalidad = props => {
   const formik = useFormik({
     initialValues: {
-      Localidad: ""
+      Localidad: props.Localidad.nombre
     },
     validationSchema: Yup.object({
       Localidad: Yup.string()
@@ -14,9 +18,19 @@ const EditarLocalidad = () => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store
+        .dispatch(
+          fetchApi(
+            ["UPDATE_LOCALIDAD", "SUCCES"],
+            "/localidades/" + props.Localidad.id,
+            { id: props.Localidad.id, Localidad: values.Localidad },
+            "PUT"
+          )
+        )
+        .then(props.history.push("/Localidades"));
     }
   });
+
   return (
     <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
@@ -63,4 +77,8 @@ const EditarLocalidad = () => {
     </div>
   );
 };
-export default EditarLocalidad;
+const mapStateToProps = state => {
+  // console.log(state.Empresas.empr.data);
+  return { App: state.App.App, Localidad: state.Localidad.Seleccionada };
+};
+export default connect(mapStateToProps)(EditarLocalidad);
