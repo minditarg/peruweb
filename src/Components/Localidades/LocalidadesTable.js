@@ -6,15 +6,22 @@ import { fetchApi } from "../../Redux/Acciones/Fetch";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import {
+  GET_LOCALIDADES,
+  UPDATE_LOCALIDAD,
+  DELETE_LOCALIDAD,
+  CREATE_LOCALIDAD,
+  RESTORE_LOCALIDAD,
+  GET_LOCALIDADES_DELETED,
+  SELECT_LOCALIDAD
+} from "../../Redux/Acciones/LocalidadesActions";
 class LocalidadesTable extends Component {
   componentDidMount() {
-    store.dispatch(
-      fetchApi(["GET_DATA_LOCALIDADES", "SUCCES"], "/localidades")
-    );
+    store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades"));
   }
   selectLocalidad(localidad) {
     store.dispatch({
-      type: "SELECT_LOCALIDAD",
+      type: SELECT_LOCALIDAD,
       payload: localidad
     });
     this.props.history.push("/Localidades/" + localidad.id);
@@ -85,6 +92,6 @@ class LocalidadesTable extends Component {
 }
 const mapStateToProps = state => {
   // console.log(state.Empresas.empr.data);
-  return { App: state.App.App, Localidades: state.Localidades.data };
+  return { App: state.App.App, Localidades: state.Localidades.Localidades };
 };
 export default connect(mapStateToProps)(LocalidadesTable);

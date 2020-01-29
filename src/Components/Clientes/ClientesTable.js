@@ -5,12 +5,18 @@ import store from "../../Redux/Store";
 import { fetchApi } from "../../Redux/Acciones/Fetch";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-
+import {
+  GET_CLIENTES,
+  UPDATE_CLIENTE,
+  DELETE_CLIENTE,
+  CREATE_CLIENTE,
+  RESTORE_CLIENTE,
+  GET_CLIENTES_DELETED,
+  SELECT_CLIENTE
+} from "../../Redux/Acciones/ClientesActions";
 class ClientesTable extends Component {
   componentDidMount() {
-    store.dispatch(
-      fetchApi(["GET_DATA_CLIENTES", "SUCCES"], "/cliente/listado")
-    );
+    store.dispatch(fetchApi([GET_CLIENTES, "SUCCES"], "/cliente/listado"));
   }
   render() {
     if (this.props.App.isLoading) {
@@ -78,6 +84,6 @@ class ClientesTable extends Component {
 }
 const mapStateToProps = state => {
   // console.log(state.Empresas.empr.data);
-  return { App: state.App.App, Clientes: state.Clientes.data };
+  return { App: state.App.App, Clientes: state.Clientes.Clientes };
 };
 export default connect(mapStateToProps)(ClientesTable);

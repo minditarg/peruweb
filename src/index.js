@@ -5,7 +5,6 @@ import App from "./App";
 import store from "./Redux/Store";
 import * as serviceWorker from "./serviceWorker";
 import { Provider } from "react-redux";
-import { selectSubreddit, fetchPosts } from "./Redux/Acciones/Fetch";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>

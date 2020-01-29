@@ -94,6 +94,7 @@ class Table extends Component {
     this.$el = $(this.el);
     this.$el.DataTable({
       data: this.props.data,
+      dataSrc: "",
       columns: columnas
     });
   }

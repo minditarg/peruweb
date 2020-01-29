@@ -20,7 +20,6 @@ import EditarLocalidad from "./Components/Localidades/EditarLocalidad";
 import ScGral from "./assets/scriptGral";
 import Login from "./Components/Login/Login";
 import Olvide from "./Components/Login/Olvide";
-import { fetchProducts } from "./Redux/Acciones/App";
 import { connect } from "react-redux";
 
 import { Login as loginfx, Logout as logoutFx } from "./Redux/Acciones/Usuario";
@@ -30,9 +29,7 @@ class App extends Component {
   }
 
   render() {
-    let logueado = this.props.user ? this.props.user.token : false; //this.props.usuario; //this.props.usuario;
-    console.log(this.props);
-
+    let logueado = this.props.user ? this.props.user.token : false;
     if (logueado) {
       return (
         <BrowserRouter>
@@ -126,6 +123,6 @@ class App extends Component {
 }
 const mapStateToProps = state => {
   console.log(state);
-  return { user: state.User };
+  return { state: state, user: state.User };
 };
 export default connect(mapStateToProps)(App);

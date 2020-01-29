@@ -6,12 +6,22 @@ import { fetchApi } from "../../Redux/Acciones/Fetch";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
+import {
+  GET_CATEGORIAS,
+  UPDATE_CATEGORIA,
+  DELETE_CATEGORIA,
+  CREATE_CATEGORIA,
+  RESTORE_CATEGORIA,
+  GET_CATEGORIAS_DELETED,
+  SELECT_CATEGORIA
+} from "../../Redux/Acciones/CategoriasActions";
+
 class CategoriasTable extends Component {
   constructor() {
     super();
   }
   componentDidMount() {
-    store.dispatch(fetchApi(["GET_DATA_CATEGORIAS", "SUCCES"], "/categorias"));
+    store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
   }
 
   render() {
@@ -75,7 +85,6 @@ class CategoriasTable extends Component {
   tableColumns = [{ title: "Categoria", data: "nombre" }];
 }
 const mapStateToProps = state => {
-  // console.log(state.Empresas.empr.data);
-  return { App: state.App.App, Categorias: state.Categorias.data };
+  return { App: state.App.App, Categorias: state.Categorias.Categorias };
 };
 export default connect(mapStateToProps)(CategoriasTable);

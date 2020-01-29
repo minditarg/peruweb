@@ -5,6 +5,16 @@ import store from "../../Redux/Store";
 import { fetchApi } from "../../Redux/Acciones/Fetch";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
+
+import {
+  GET_EMPRESAS,
+  UPDATE_EMPRESA,
+  DELETE_EMPRESA,
+  CREATE_EMPRESA,
+  RESTORE_EMPRESA,
+  GET_EMPRESAS_DELETED,
+  SELECT_EMPRESA
+} from "../../Redux/Acciones/EmpresasActions";
 class ProveedoresTable extends Component {
   constructor() {
     super();
@@ -13,9 +23,7 @@ class ProveedoresTable extends Component {
     };
   }
   componentDidMount() {
-    store.dispatch(
-      fetchApi(["GET_DATA_EMPRESA", "SUCCES"], "/proveedores/listado")
-    );
+    store.dispatch(fetchApi([GET_EMPRESAS, "SUCCES"], "/proveedores/listado"));
   }
   OpenModal(e) {
     this.setState({
@@ -26,15 +34,13 @@ class ProveedoresTable extends Component {
     console.log("eliminando");
     store.dispatch(
       fetchApi(
-        ["DELETE_PROVEEDOR", "SUCCES"],
+        [DELETE_EMPRESA, "SUCCES"],
         "/proveedor/" + this.state.Seleccionado.id,
         {},
         "DELETE"
       )
     );
-    store.dispatch(
-      fetchApi(["GET_DATA_EMPRESA", "SUCCES"], "/proveedores/listado")
-    );
+    store.dispatch(fetchApi([GET_EMPRESAS, "SUCCES"], "/proveedores/listado"));
   }
   render() {
     if (this.props.App.isLoading) {
@@ -113,6 +119,6 @@ class ProveedoresTable extends Component {
 }
 const mapStateToProps = state => {
   // console.log(state.Empresas.empr.data);
-  return { App: state.App.App, Empresas: state.Empresas.data };
+  return { App: state.App.App, Empresas: state.Empresas.Empresas };
 };
 export default connect(mapStateToProps)(ProveedoresTable);

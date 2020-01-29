@@ -5,12 +5,18 @@ import store from "../../Redux/Store";
 import { fetchApi } from "../../Redux/Acciones/Fetch";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-
+import {
+  GET_SUBCATEGORIAS,
+  UPDATE_SUBCATEGORIAS,
+  DELETE_SUBCATEGORIAS,
+  CREATE_SUBCATEGORIAS,
+  RESTORE_SUBCATEGORIAS,
+  GET_SUBCATEGORIAS_DELETED,
+  SELECT_SUBCATEGORIAS
+} from "../../Redux/Acciones/SubcategoriasActions";
 class SubcategoriasTable extends Component {
   componentDidMount() {
-    store.dispatch(
-      fetchApi(["GET_DATA_SUBCATEGORIAS", "SUCCES"], "/subcategorias")
-    );
+    store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias"));
   }
 
   render() {
