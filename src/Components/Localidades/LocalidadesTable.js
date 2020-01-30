@@ -20,6 +20,7 @@ class LocalidadesTable extends Component {
     store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades"));
   }
   selectLocalidad(localidad) {
+    console.log(localidad);
     store.dispatch({
       type: SELECT_LOCALIDAD,
       payload: localidad

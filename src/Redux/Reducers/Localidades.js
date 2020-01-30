@@ -9,9 +9,9 @@ import {
 } from "../Acciones/LocalidadesActions";
 
 const initialState = {
-  Localidades: "No hay Localidades",
+  Localidades: [],
   Localidad: "no hay Localidad seleccionada",
-  LocalidadesDeleted: "no hay Localidades eliminadas"
+  LocalidadesDeleted: []
 };
 
 function reducer(state = initialState, { type, payload }) {
