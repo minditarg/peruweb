@@ -60,36 +60,21 @@ class Menu extends Component {
             <span>Categorias</span>
           </NavLink>
         </li>
-        <li className="nav-item">
-          <NavLink to="/CategoriasEliminadas" className="nav-link">
-            <i className="fas fa-tag tachado"></i>
-            <span>Categorias Eliminadas</span>
-          </NavLink>
-        </li>
+
         <li className="nav-item ">
           <NavLink to="/Subcategorias" className="nav-link">
             <i className="fas fa-tags"></i>
             <span>Subcategorias</span>
           </NavLink>
         </li>
-        <li className="nav-item ">
-          <NavLink to="/SubcategoriasEliminadas" className="nav-link">
-            <i className="fas fa-tags tachado"></i>
-            <span>Subcategorias Eliminadas</span>
-          </NavLink>
-        </li>
+
         <li className="nav-item ">
           <NavLink to="/Localidades" className="nav-link">
             <i className="fas fa-map-marker-alt"></i>
             <span>Localidades</span>
           </NavLink>
         </li>
-        <li className="nav-item ">
-          <NavLink to="/LocalidadesEliminadas" className="nav-link">
-            <i className="fas fa-map-marker-alt tachado"></i>
-            <span>Localidades Eliminadas</span>
-          </NavLink>
-        </li>
+
         <hr className="sidebar-divider d-none d-md-block" />
 
         <div className="text-center d-none d-md-inline">

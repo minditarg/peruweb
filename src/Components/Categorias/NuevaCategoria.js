@@ -2,6 +2,21 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+import store from "../../Redux/Store";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+
+import {
+  GET_CATEGORIAS,
+  UPDATE_CATEGORIA,
+  DELETE_CATEGORIA,
+  CREATE_CATEGORIA,
+  RESTORE_CATEGORIA,
+  GET_CATEGORIAS_DELETED,
+  SELECT_CATEGORIA
+} from "../../Redux/Acciones/CategoriasActions";
+
 const NuevaCategoria = () => {
   const formik = useFormik({
     initialValues: {
@@ -13,9 +28,20 @@ const NuevaCategoria = () => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch(
+        fetchApi(
+          [CREATE_CATEGORIA, "SUCCES"],
+          "/categorias",
+          {
+            nombre: values.Categoria
+          },
+          "post",
+          false
+        )
+      );
     }
   });
+
   return (
     <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">

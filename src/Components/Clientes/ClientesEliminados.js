@@ -16,7 +16,9 @@ import {
 } from "../../Redux/Acciones/ClientesActions";
 class ClientesEliminados extends Component {
   componentDidMount() {
-    store.dispatch(fetchApi([GET_CLIENTES_DELETED, "SUCCES"], "/cliente/listado"));
+    store.dispatch(
+      fetchApi([GET_CLIENTES_DELETED, "SUCCES"], "/cliente/eliminados")
+    );
   }
   render() {
     if (this.props.App.isLoading) {
@@ -24,7 +26,9 @@ class ClientesEliminados extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Clientes Eliminados </h6>
+              <h6 className="m-0 font-weight-bold text-primary">
+                Clientes Eliminados{" "}
+              </h6>
               <NavLink
                 to="/NuevoCliente"
                 className="btn btn-primary btn-icon-split"
@@ -47,7 +51,9 @@ class ClientesEliminados extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Clientes Eliminados </h6>
+              <h6 className="m-0 font-weight-bold text-primary">
+                Clientes Eliminados{" "}
+              </h6>
               <NavLink
                 to="/NuevoCliente"
                 className="btn btn-primary btn-icon-split"
@@ -84,6 +90,6 @@ class ClientesEliminados extends Component {
 }
 const mapStateToProps = state => {
   // console.log(state.Empresas.empr.data);
-  return { App: state.App.App, Clientes: state.Clientes.Clientes };
+  return { App: state.App.App, Clientes: state.Clientes.ClientesDeleted };
 };
 export default connect(mapStateToProps)(ClientesEliminados);

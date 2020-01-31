@@ -23,7 +23,9 @@ class ProveedoresEliminados extends Component {
     };
   }
   componentDidMount() {
-    store.dispatch(fetchApi([GET_EMPRESAS_DELETED, "SUCCES"], "/proveedores/listado"));
+    store.dispatch(
+      fetchApi([GET_EMPRESAS_DELETED, "SUCCES"], "/proveedores/eliminados")
+    );
   }
   OpenModal(e) {
     this.setState({
@@ -34,13 +36,15 @@ class ProveedoresEliminados extends Component {
     console.log("eliminando");
     store.dispatch(
       fetchApi(
-        [RESTORE_EMPRESA, "SUCCES"],
+        [DELETE_EMPRESA, "SUCCES"],
         "/proveedor/" + this.state.Seleccionado.id,
         {},
-        "DELETE"
+        "delete"
       )
     );
-    store.dispatch(fetchApi([GET_EMPRESAS_DELETED, "SUCCES"], "/proveedores/listado"));
+    store.dispatch(
+      fetchApi([GET_EMPRESAS_DELETED, "SUCCES"], "/proveedores/eliminados")
+    );
   }
   render() {
     if (this.props.App.isLoading) {
@@ -48,7 +52,9 @@ class ProveedoresEliminados extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Proveedores Eliminados</h6>
+              <h6 className="m-0 font-weight-bold text-primary">
+                Proveedores Eliminados
+              </h6>
               <NavLink
                 to="/NuevoProveedor"
                 className="btn btn-primary btn-icon-split"
@@ -71,7 +77,9 @@ class ProveedoresEliminados extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Proveedores Eliminados</h6>
+              <h6 className="m-0 font-weight-bold text-primary">
+                Proveedores Eliminados
+              </h6>
               <NavLink
                 to="/NuevoProveedor"
                 className="btn btn-primary btn-icon-split"
@@ -119,6 +127,6 @@ class ProveedoresEliminados extends Component {
 }
 const mapStateToProps = state => {
   // console.log(state.Empresas.empr.data);
-  return { App: state.App.App, Empresas: state.Empresas.Empresas };
+  return { App: state.App.App, Empresas: state.Empresas.EmpresasDeleted };
 };
 export default connect(mapStateToProps)(ProveedoresEliminados);

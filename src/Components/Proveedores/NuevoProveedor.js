@@ -2,6 +2,21 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "../Select/Select";
+
+import store from "../../Redux/Store";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import {
+  GET_EMPRESAS,
+  UPDATE_EMPRESA,
+  DELETE_EMPRESA,
+  CREATE_EMPRESA,
+  RESTORE_EMPRESA,
+  GET_EMPRESAS_DELETED,
+  SELECT_EMPRESA
+} from "../../Redux/Acciones/EmpresasActions";
+
 const NuevoProveedor = () => {
   const formik = useFormik({
     initialValues: {
@@ -31,13 +46,30 @@ const NuevoProveedor = () => {
       Tipo: Yup.string().required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch(
+        fetchApi(
+          [CREATE_EMPRESA, "SUCCES"],
+          "/proveedor",
+          {
+            email: values.Mail,
+            nombre: values.Nombre,
+            telefono: values.Telefono,
+            tipo: values.Tipo.value,
+            direccion: values.Direccion,
+            descripcion: values.Descripcion,
+            foto: null,
+            localidad: values.Localidad.value
+          },
+          "post",
+          false
+        )
+      );
     }
   });
   const OpLocalidad = [
-    { value: "Laprida", label: "Laprida" },
-    { value: "Berisso", label: "Berisso" },
-    { value: "La Plata", label: "La Plata" }
+    { value: 1, label: "Laprida" },
+    { value: 2, label: "Berisso" },
+    { value: 3, label: "La Plata" }
   ];
   const OpTipo = [
     { value: "Premium", label: "Premium" },
@@ -49,7 +81,9 @@ const NuevoProveedor = () => {
     <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 className="m-0 font-weight-bold text-primary">Nuevo Proveedor </h6>
+          <h6 className="m-0 font-weight-bold text-primary">
+            Nuevo Proveedor{" "}
+          </h6>
         </div>
         <div className="card-body">
           <form className="user" onSubmit={formik.handleSubmit}>

@@ -1,7 +1,19 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import store from "../../Redux/Store";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
+import {
+  GET_CLIENTES,
+  UPDATE_CLIENTE,
+  DELETE_CLIENTE,
+  CREATE_CLIENTE,
+  RESTORE_CLIENTE,
+  GET_CLIENTES_DELETED,
+  SELECT_CLIENTE
+} from "../../Redux/Acciones/ClientesActions";
 const NuevoCliente = () => {
   const formik = useFormik({
     initialValues: {
@@ -19,7 +31,17 @@ const NuevoCliente = () => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch(
+        fetchApi(
+          [CREATE_CLIENTE, "SUCCES"],
+          "/cliente",
+          {
+            email: values.Mail,
+            nombre: values.Nombre
+          },
+          "post"
+        )
+      );
     }
   });
   return (

@@ -37,7 +37,7 @@ class ProveedoresTable extends Component {
         [DELETE_EMPRESA, "SUCCES"],
         "/proveedor/" + this.state.Seleccionado.id,
         {},
-        "DELETE"
+        "delete"
       )
     );
     store.dispatch(fetchApi([GET_EMPRESAS, "SUCCES"], "/proveedores/listado"));

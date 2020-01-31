@@ -1,10 +1,10 @@
 import fetch from "cross-fetch";
 import store from "../Store";
 const config = {
-   url: 'http://50.63.166.215:5001/api',
-   pathFiles: 'http://50.63.166.215:5001/uploads/',
-  ////url: "http://10.30.30.125:3001/api",
- // pathFiles: "http://10.30.30.125:3001/uploads/"
+  //url: 'http://50.63.166.215:5001/api',
+  //pathFiles: 'http://50.63.166.215:5001/uploads/',
+  url: "http://10.30.30.125:3001/api",
+  pathFiles: "http://10.30.30.125:3001/uploads/"
 };
 
 export const FETCHING = "FETCHING";
@@ -38,17 +38,15 @@ export function fetchApi(
   return function(dispatch) {
     dispatch(fetching());
 
-    console.log(config.url + endpoint, {
-      method: metodo,
-      headers: {
-        Accept: multipart ? "" : "application/json",
-        Authorization: "Bearer " + accessToken,
-        ...(!multipart ? { "Content-Type": "application/json" } : {})
-      },
-      ...((metodo === "post") | (metodo === "put")
-        ? { body: multipart ? payload : JSON.stringify(payload) }
-        : {})
+    console.log(config.url + endpoint);
+    console.log(metodo);
+    console.log({
+      Accept: multipart ? "" : "application/json",
+      Authorization: "Bearer " + accessToken,
+      ...(!multipart ? { "Content-Type": "application/json" } : {})
     });
+    console.log(payload);
+    console.log(JSON.stringify(payload));
 
     return fetch(config.url + endpoint, {
       method: metodo,

@@ -29,7 +29,7 @@ import NuevaSubcategoria from "./Components/Subcategorias/NuevaSubcategoria";
 import LocalidadesEliminadas from "./Components/Localidades/LocalidadesEliminadas";
 import NuevaLocalidad from "./Components/Localidades/NuevaLocalidad";
 
-import Error from './Components/Mensajes/Error';
+import Error from "./Components/Mensajes/Error";
 
 import ScGral from "./assets/scriptGral";
 import Login from "./Components/Login/Login";
@@ -48,7 +48,7 @@ class App extends Component {
       return (
         <BrowserRouter>
           <div className="App">
-            <Error/>
+            <Error />
             <div id="wrapper">
               <Menu />
               <div id="content-wrapper" className="d-flex flex-column">
@@ -62,15 +62,16 @@ class App extends Component {
                           path="/Proveedores"
                           component={ProveedoresTable}
                         />
-                          <Route
+                        <Route
                           exact
                           path="/ProveedoresEliminados"
                           component={ProveedoresEliminados}
-                        />  <Route
-                        exact
-                        path="/NuevoProveedor"
-                        component={NuevoProveedor}
-                      />
+                        />{" "}
+                        <Route
+                          exact
+                          path="/NuevoProveedor"
+                          component={NuevoProveedor}
+                        />
                         <Route
                           exact
                           path="/Proveedores/:id"
@@ -81,12 +82,12 @@ class App extends Component {
                           path="/Clientes"
                           component={ClientesTable}
                         />
-                         <Route
+                        <Route
                           exact
                           path="/ClientesEliminados"
                           component={ClientesEliminados}
                         />
-                         <Route
+                        <Route
                           exact
                           path="/NuevoCliente"
                           component={NuevoCliente}
@@ -100,15 +101,12 @@ class App extends Component {
                           exact
                           path="/Categorias"
                           component={CategoriasTable}
-                        />  <Route
-                        exact
-                        path="/CategoriasEliminadas"
-                        component={CategoriasEliminadas}
-                      />  <Route
-                      exact
-                      path="/NuevaCategoria"
-                      component={NuevaCategoria}
-                    />
+                        />
+                        <Route
+                          exact
+                          path="/NuevaCategoria"
+                          component={NuevaCategoria}
+                        />
                         <Route
                           exact
                           path="/Categorias/:id"
@@ -119,12 +117,7 @@ class App extends Component {
                           path="/Subcategorias"
                           component={SubcategoriasTable}
                         />
-                          <Route
-                          exact
-                          path="/SubcategoriasEliminadas"
-                          component={SubcategoriasEliminadas}
-                        />
-                          <Route
+                        <Route
                           exact
                           path="/NuevaSubcategoria"
                           component={NuevaSubcategoria}
@@ -139,12 +132,7 @@ class App extends Component {
                           path="/Localidades"
                           component={LocalidadesTable}
                         />
-                          <Route
-                          exact
-                          path="/LocalidadesEliminadas"
-                          component={LocalidadesEliminadas}
-                        />
-                          <Route
+                        <Route
                           exact
                           path="/NuevaLocalidad"
                           component={NuevaLocalidad}
@@ -174,7 +162,7 @@ class App extends Component {
     } else {
       return (
         <BrowserRouter>
-          <Error/>
+          <Error />
           <Switch>
             <Route exact path="/Olvide" component={Olvide} />
             <Route path="/" component={Login} />
