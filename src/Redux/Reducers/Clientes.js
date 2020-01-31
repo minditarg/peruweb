@@ -9,9 +9,9 @@ import {
 } from "../Acciones/ClientesActions";
 
 const initialState = {
-  Clientes: "No hay clientes",
+  Clientes: [],
   Cliente: "no hay Cliente seleccionada",
-  ClientesDeleted: "no hay Clientes eliminadas"
+  ClientesDeleted: [],
 };
 
 function reducer(state = initialState, { type, payload }) {

@@ -9,9 +9,9 @@ import {
 } from "../Acciones/EmpresasActions";
 
 const initialState = {
-  Empresas: "No hay empresas",
+  Empresas: [],
   Empresa: "no hay empresa seleccionada",
-  EmpresasDeleted: "no hay empresas eliminadas"
+  EmpresasDeleted: []
 };
 
 function reducer(state = initialState, { type, payload }) {

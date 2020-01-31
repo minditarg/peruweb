@@ -9,9 +9,9 @@ import {
 } from "../Acciones/SubcategoriasActions";
 
 const initialState = {
-  Subcategorias: "No hay Subcategorias",
+  Subcategorias: [],
   Subcategoria: "no hay Subcategoria seleccionada",
-  SubcategoriasDeleted: "no hay Subcategorias eliminadas"
+  SubcategoriasDeleted: []
 };
 
 function reducer(state = initialState, { type, payload }) {

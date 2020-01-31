@@ -5,7 +5,7 @@ class Menu extends Component {
   render() {
     return (
       <ul
-        className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled"
         id="accordionSidebar"
       >
         <NavLink
@@ -30,11 +30,25 @@ class Menu extends Component {
             <i className="fas fa-user-shield"></i>
             <span>Proveedores</span>
           </NavLink>
+          <NavLink
+            to="/ProveedoresEliminados"
+            activeClassName="active"
+            className="nav-link"
+          >
+            <i className="fas fa-user-shield tachado"></i>
+            <span>Proveedores Eliminados</span>
+          </NavLink>
         </li>
         <li className="nav-item ">
           <NavLink to="/Clientes" className="nav-link">
             <i className="fas fa-users"></i>
             <span>Clientes</span>
+          </NavLink>
+        </li>
+        <li className="nav-item ">
+          <NavLink to="/ClientesEliminados" className="nav-link">
+            <i className="fas fa-users tachado"></i>
+            <span>Clientes Eliminados</span>
           </NavLink>
         </li>
         <hr className="sidebar-divider" />
@@ -46,10 +60,22 @@ class Menu extends Component {
             <span>Categorias</span>
           </NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink to="/CategoriasEliminadas" className="nav-link">
+            <i className="fas fa-tag tachado"></i>
+            <span>Categorias Eliminadas</span>
+          </NavLink>
+        </li>
         <li className="nav-item ">
           <NavLink to="/Subcategorias" className="nav-link">
             <i className="fas fa-tags"></i>
             <span>Subcategorias</span>
+          </NavLink>
+        </li>
+        <li className="nav-item ">
+          <NavLink to="/SubcategoriasEliminadas" className="nav-link">
+            <i className="fas fa-tags tachado"></i>
+            <span>Subcategorias Eliminadas</span>
           </NavLink>
         </li>
         <li className="nav-item ">
@@ -58,7 +84,12 @@ class Menu extends Component {
             <span>Localidades</span>
           </NavLink>
         </li>
-
+        <li className="nav-item ">
+          <NavLink to="/LocalidadesEliminadas" className="nav-link">
+            <i className="fas fa-map-marker-alt tachado"></i>
+            <span>Localidades Eliminadas</span>
+          </NavLink>
+        </li>
         <hr className="sidebar-divider d-none d-md-block" />
 
         <div className="text-center d-none d-md-inline">

@@ -37,7 +37,7 @@ class LocalidadesTable extends Component {
                 Localidades{" "}
               </h6>
               <NavLink
-                to="/addProvedor"
+                to="/NuevaLocalidad"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
@@ -62,7 +62,7 @@ class LocalidadesTable extends Component {
                 Localidades{" "}
               </h6>
               <NavLink
-                to="/addProvedor"
+                to="/NuevaLocalidad"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">

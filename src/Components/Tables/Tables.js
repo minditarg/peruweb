@@ -29,6 +29,19 @@ class Table extends Component {
       td
     );
   }
+  restaurarBtn(td, cellData) {
+    ReactDOM.render(
+      <a
+        onClick={() => this.props.eliminar(cellData)}
+        data-toggle="modal"
+        data-target="#restaurar"
+        className="btn btn-success btn-circle btn-sm ActionButton white"
+      >
+        <i className="fa fa-life-ring"></i>
+      </a>,
+      td
+    );
+  }
   ambosBtns(td, cellData) {
     ReactDOM.render(
       <span>
@@ -50,10 +63,30 @@ class Table extends Component {
       td
     );
   }
-
+  ambosBtns2(td, cellData) {
+    ReactDOM.render(
+      <span>
+        <a
+          onClick={() => this.props.editar(cellData)}
+          className="btn btn-warning btn-circle btn-sm ActionButton white"
+        >
+          <i className="fa fa-edit"></i>
+        </a>
+        <a
+        onClick={() => this.props.eliminar(cellData)}
+        data-toggle="modal"
+        data-target="#restaurar"
+        className="btn btn-success btn-circle btn-sm ActionButton white"
+      >
+        <i className="fa fa-life-ring"></i>
+      </a>
+      </span>,
+      td
+    );
+  }
   componentDidMount() {
     let columnas = this.props.columns;
-    if (this.props.editable && !this.props.eliminable) {
+    if (this.props.editable && !this.props.eliminable && !this.props.restaurable) {
       columnas = [
         ...this.props.columns,
         {
@@ -65,7 +98,7 @@ class Table extends Component {
           }
         }
       ];
-    } else if (!this.props.editable && this.props.eliminable) {
+    } else if (!this.props.editable && this.props.eliminable && !this.props.restaurable) {
       columnas = [
         ...this.props.columns,
         {
@@ -77,7 +110,7 @@ class Table extends Component {
           }
         }
       ];
-    } else if (this.props.editable && this.props.eliminable) {
+    } else if (this.props.editable && this.props.eliminable && !this.props.restaurable) {
       columnas = [
         ...this.props.columns,
         {
@@ -90,7 +123,19 @@ class Table extends Component {
         }
       ];
     }
-
+    else if (this.props.editable && this.props.restaurable  && !this.props.eliminable) {
+      columnas = [
+        ...this.props.columns,
+        {
+          title: "Acciones",
+          mData: null,
+          bSortable: false,
+          createdCell: (td, cellData) => {
+            this.ambosBtns2(td, cellData);
+          }
+        }
+      ];
+    }
     this.$el = $(this.el);
     this.$el.DataTable({
       data: this.props.data,

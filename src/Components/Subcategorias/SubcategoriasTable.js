@@ -29,7 +29,7 @@ class SubcategoriasTable extends Component {
                 Subcategorias
               </h6>
               <NavLink
-                to="/addProvedor"
+                to="/NuevaSubcategoria"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
@@ -54,7 +54,7 @@ class SubcategoriasTable extends Component {
                 Subcategorias
               </h6>
               <NavLink
-                to="/addProvedor"
+                to="/NuevaSubcategoria"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
@@ -89,6 +89,6 @@ class SubcategoriasTable extends Component {
 }
 const mapStateToProps = state => {
   console.log(state);
-  return { App: state.App.App /*Subategorias: state.Subategorias.data */ };
+  return { App: state.App.App, Subategorias: state.Subcategorias.Subcategorias };
 };
 export default connect(mapStateToProps)(SubcategoriasTable);

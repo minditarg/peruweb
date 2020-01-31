@@ -7,42 +7,47 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import {
-  GET_CATEGORIAS,
-  UPDATE_CATEGORIA,
-  DELETE_CATEGORIA,
-  CREATE_CATEGORIA,
-  RESTORE_CATEGORIA,
-  GET_CATEGORIAS_DELETED,
-  SELECT_CATEGORIA
-} from "../../Redux/Acciones/CategoriasActions";
-
-class CategoriasTable extends Component {
-  constructor() {
-    super();
-  }
+  GET_LOCALIDADES,
+  UPDATE_LOCALIDAD,
+  DELETE_LOCALIDAD,
+  CREATE_LOCALIDAD,
+  RESTORE_LOCALIDAD,
+  GET_LOCALIDADES_DELETED,
+  SELECT_LOCALIDAD
+} from "../../Redux/Acciones/LocalidadesActions";
+class LocalidadesEliminadas extends Component {
   componentDidMount() {
-    store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
+    store.dispatch(fetchApi([GET_LOCALIDADES_DELETED, "SUCCES"], "/localidades"));
   }
-
+  selectLocalidad(localidad) {
+    console.log(localidad);
+    store.dispatch({
+      type: SELECT_LOCALIDAD,
+      payload: localidad
+    });
+    this.props.history.push("/Localidades/" + localidad.id);
+  }
   render() {
     if (this.props.App.isLoading) {
       return (
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Categorias </h6>
+              <h6 className="m-0 font-weight-bold text-primary">
+                Localidades Eliminadas{" "}
+              </h6>
               <NavLink
-                to="/NuevaCategoria"
+                to="/NuevaLocalidad"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
                   <i className="fas fa-plus"></i>
                 </span>
-                <span className="text">Nueva Categoría</span>
+                <span className="text">Nueva Localidad</span>
               </NavLink>
             </div>
             <div className="card-body">
-              <div className="table-responsive">LOADING....</div>
+              <div className="table-responsive">LOADING...</div>
             </div>
           </div>
           <Modal modalId="eliminar" nombre="regato" />
@@ -53,26 +58,28 @@ class CategoriasTable extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Categorias </h6>
+              <h6 className="m-0 font-weight-bold text-primary">
+                Localidades Eliminadas{" "}
+              </h6>
               <NavLink
-                to="/NuevaCategoria"
+                to="/NuevaLocalidad"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
                   <i className="fas fa-plus"></i>
                 </span>
-                <span className="text">Nueva Categoría</span>
+                <span className="text">Nueva Localidad</span>
               </NavLink>
             </div>
             <div className="card-body">
               <div className="table-responsive">
                 <Table
-                  data={this.props.Categorias}
+                  data={this.props.Localidades}
                   columns={this.tableColumns}
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Categorias/" + e)}
+                  editar={e => this.selectLocalidad(e)}
                 ></Table>
               </div>
             </div>
@@ -82,9 +89,10 @@ class CategoriasTable extends Component {
       );
     }
   }
-  tableColumns = [{ title: "Categoria", data: "nombre" }];
+  tableColumns = [{ title: "Localidad", data: "nombre" }];
 }
 const mapStateToProps = state => {
-  return { App: state.App.App, Categorias: state.Categorias.Categorias };
+  // console.log(state.Empresas.empr.data);
+  return { App: state.App.App, Localidades: state.Localidades.Localidades };
 };
-export default connect(mapStateToProps)(CategoriasTable);
+export default connect(mapStateToProps)(LocalidadesEliminadas);

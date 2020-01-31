@@ -16,12 +16,12 @@ import {
   SELECT_CATEGORIA
 } from "../../Redux/Acciones/CategoriasActions";
 
-class CategoriasTable extends Component {
+class CategoriasEliminadas extends Component {
   constructor() {
     super();
   }
   componentDidMount() {
-    store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
+    store.dispatch(fetchApi([GET_CATEGORIAS_DELETED, "SUCCES"], "/categorias"));
   }
 
   render() {
@@ -30,7 +30,7 @@ class CategoriasTable extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Categorias </h6>
+              <h6 className="m-0 font-weight-bold text-primary">Categorias Eliminadas </h6>
               <NavLink
                 to="/NuevaCategoria"
                 className="btn btn-primary btn-icon-split"
@@ -53,7 +53,7 @@ class CategoriasTable extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Categorias </h6>
+              <h6 className="m-0 font-weight-bold text-primary">Categorias Eliminadas </h6>
               <NavLink
                 to="/NuevaCategoria"
                 className="btn btn-primary btn-icon-split"
@@ -70,7 +70,7 @@ class CategoriasTable extends Component {
                   data={this.props.Categorias}
                   columns={this.tableColumns}
                   editable
-                  eliminable
+                  restaurable
                   router={this.props.router}
                   editar={e => this.props.history.push("/Categorias/" + e)}
                 ></Table>
@@ -87,4 +87,4 @@ class CategoriasTable extends Component {
 const mapStateToProps = state => {
   return { App: state.App.App, Categorias: state.Categorias.Categorias };
 };
-export default connect(mapStateToProps)(CategoriasTable);
+export default connect(mapStateToProps)(CategoriasEliminadas);

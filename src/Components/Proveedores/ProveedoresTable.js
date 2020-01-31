@@ -50,7 +50,7 @@ class ProveedoresTable extends Component {
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">Proveedores</h6>
               <NavLink
-                to="/addProvedor"
+                to="/NuevoProveedor"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
@@ -73,7 +73,7 @@ class ProveedoresTable extends Component {
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">Proveedores</h6>
               <NavLink
-                to="/addProvedor"
+                to="/NuevoProveedor"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">

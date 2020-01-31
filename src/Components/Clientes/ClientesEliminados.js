@@ -5,40 +5,34 @@ import store from "../../Redux/Store";
 import { fetchApi } from "../../Redux/Acciones/Fetch";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
-
 import {
-  GET_CATEGORIAS,
-  UPDATE_CATEGORIA,
-  DELETE_CATEGORIA,
-  CREATE_CATEGORIA,
-  RESTORE_CATEGORIA,
-  GET_CATEGORIAS_DELETED,
-  SELECT_CATEGORIA
-} from "../../Redux/Acciones/CategoriasActions";
-
-class CategoriasTable extends Component {
-  constructor() {
-    super();
-  }
+  GET_CLIENTES,
+  UPDATE_CLIENTE,
+  DELETE_CLIENTE,
+  CREATE_CLIENTE,
+  RESTORE_CLIENTE,
+  GET_CLIENTES_DELETED,
+  SELECT_CLIENTE
+} from "../../Redux/Acciones/ClientesActions";
+class ClientesEliminados extends Component {
   componentDidMount() {
-    store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
+    store.dispatch(fetchApi([GET_CLIENTES_DELETED, "SUCCES"], "/cliente/listado"));
   }
-
   render() {
     if (this.props.App.isLoading) {
       return (
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Categorias </h6>
+              <h6 className="m-0 font-weight-bold text-primary">Clientes Eliminados </h6>
               <NavLink
-                to="/NuevaCategoria"
+                to="/NuevoCliente"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
                   <i className="fas fa-plus"></i>
                 </span>
-                <span className="text">Nueva Categoría</span>
+                <span className="text">Nuevo Cliente</span>
               </NavLink>
             </div>
             <div className="card-body">
@@ -53,26 +47,26 @@ class CategoriasTable extends Component {
         <div className="col-xl-12 col-lg-12">
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 className="m-0 font-weight-bold text-primary">Categorias </h6>
+              <h6 className="m-0 font-weight-bold text-primary">Clientes Eliminados </h6>
               <NavLink
-                to="/NuevaCategoria"
+                to="/NuevoCliente"
                 className="btn btn-primary btn-icon-split"
               >
                 <span className="icon text-white-50">
                   <i className="fas fa-plus"></i>
                 </span>
-                <span className="text">Nueva Categoría</span>
+                <span className="text">Nuevo Cliente</span>
               </NavLink>
             </div>
             <div className="card-body">
               <div className="table-responsive">
                 <Table
-                  data={this.props.Categorias}
+                  data={this.props.Clientes}
                   columns={this.tableColumns}
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Categorias/" + e)}
+                  editar={e => this.props.history.push("/Clientes/" + e)}
                 ></Table>
               </div>
             </div>
@@ -82,9 +76,14 @@ class CategoriasTable extends Component {
       );
     }
   }
-  tableColumns = [{ title: "Categoria", data: "nombre" }];
+
+  tableColumns = [
+    { title: "Cliente", data: "Usuario.nombre" },
+    { title: "Mail", data: "Usuario.email" }
+  ];
 }
 const mapStateToProps = state => {
-  return { App: state.App.App, Categorias: state.Categorias.Categorias };
+  // console.log(state.Empresas.empr.data);
+  return { App: state.App.App, Clientes: state.Clientes.Clientes };
 };
-export default connect(mapStateToProps)(CategoriasTable);
+export default connect(mapStateToProps)(ClientesEliminados);

@@ -543,7 +543,24 @@ table.dataTable td {
 .formError {
     color: red;
 }
-
+.tachado::after{
+    content: 'X';
+    font-family: sans-serif;
+    color: #c34848;
+    font-size: 17px;
+    margin-left: -50%;
+    font-weight: 100;
+}
+.LosMensajes{
+    position: fixed;
+    z-index: 999;
+    text-align: center;
+    width: 100%;
+}
+.alert{
+    display: inline-block;
+    margin: 10px;
+}
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,
     .dataTables_wrapper .dataTables_paginate {

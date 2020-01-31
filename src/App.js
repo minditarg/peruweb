@@ -17,6 +17,20 @@ import SubcategoriasTable from "./Components/Subcategorias/SubcategoriasTable";
 import EditarSubcategoria from "./Components/Subcategorias/EditarSubcategoria";
 import LocalidadesTable from "./Components/Localidades/LocalidadesTable";
 import EditarLocalidad from "./Components/Localidades/EditarLocalidad";
+
+import ProveedoresEliminados from "./Components/Proveedores/ProveedoresEliminados";
+import NuevoProveedor from "./Components/Proveedores/NuevoProveedor";
+import ClientesEliminados from "./Components/Clientes/ClientesEliminados";
+import NuevoCliente from "./Components/Clientes/NuevoCliente";
+import CategoriasEliminadas from "./Components/Categorias/CategoriasEliminadas";
+import NuevaCategoria from "./Components/Categorias/NuevaCategoria";
+import SubcategoriasEliminadas from "./Components/Subcategorias/SubcategoriasEliminadas";
+import NuevaSubcategoria from "./Components/Subcategorias/NuevaSubcategoria";
+import LocalidadesEliminadas from "./Components/Localidades/LocalidadesEliminadas";
+import NuevaLocalidad from "./Components/Localidades/NuevaLocalidad";
+
+import Error from './Components/Mensajes/Error';
+
 import ScGral from "./assets/scriptGral";
 import Login from "./Components/Login/Login";
 import Olvide from "./Components/Login/Olvide";
@@ -34,6 +48,7 @@ class App extends Component {
       return (
         <BrowserRouter>
           <div className="App">
+            <Error/>
             <div id="wrapper">
               <Menu />
               <div id="content-wrapper" className="d-flex flex-column">
@@ -47,6 +62,15 @@ class App extends Component {
                           path="/Proveedores"
                           component={ProveedoresTable}
                         />
+                          <Route
+                          exact
+                          path="/ProveedoresEliminados"
+                          component={ProveedoresEliminados}
+                        />  <Route
+                        exact
+                        path="/NuevoProveedor"
+                        component={NuevoProveedor}
+                      />
                         <Route
                           exact
                           path="/Proveedores/:id"
@@ -57,6 +81,16 @@ class App extends Component {
                           path="/Clientes"
                           component={ClientesTable}
                         />
+                         <Route
+                          exact
+                          path="/ClientesEliminados"
+                          component={ClientesEliminados}
+                        />
+                         <Route
+                          exact
+                          path="/NuevoCliente"
+                          component={NuevoCliente}
+                        />
                         <Route
                           exact
                           path="/Clientes/:id"
@@ -66,7 +100,15 @@ class App extends Component {
                           exact
                           path="/Categorias"
                           component={CategoriasTable}
-                        />
+                        />  <Route
+                        exact
+                        path="/CategoriasEliminadas"
+                        component={CategoriasEliminadas}
+                      />  <Route
+                      exact
+                      path="/NuevaCategoria"
+                      component={NuevaCategoria}
+                    />
                         <Route
                           exact
                           path="/Categorias/:id"
@@ -77,6 +119,16 @@ class App extends Component {
                           path="/Subcategorias"
                           component={SubcategoriasTable}
                         />
+                          <Route
+                          exact
+                          path="/SubcategoriasEliminadas"
+                          component={SubcategoriasEliminadas}
+                        />
+                          <Route
+                          exact
+                          path="/NuevaSubcategoria"
+                          component={NuevaSubcategoria}
+                        />
                         <Route
                           exact
                           path="/Subcategorias/:id"
@@ -86,6 +138,16 @@ class App extends Component {
                           exact
                           path="/Localidades"
                           component={LocalidadesTable}
+                        />
+                          <Route
+                          exact
+                          path="/LocalidadesEliminadas"
+                          component={LocalidadesEliminadas}
+                        />
+                          <Route
+                          exact
+                          path="/NuevaLocalidad"
+                          component={NuevaLocalidad}
                         />
                         <Route
                           exact
@@ -112,6 +174,7 @@ class App extends Component {
     } else {
       return (
         <BrowserRouter>
+          <Error/>
           <Switch>
             <Route exact path="/Olvide" component={Olvide} />
             <Route path="/" component={Login} />
