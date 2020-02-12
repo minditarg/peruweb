@@ -27,6 +27,7 @@ const NuevaLocalidad = props => {
             "POST"
           )
         )
+        .then(()=> { store.dispatch(fetchApi(["GET_LOCALIDADES", "SUCCES"], "/localidades")) } )
         .then(props.history.push("/Localidades"));
     }
   });

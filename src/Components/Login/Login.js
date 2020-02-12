@@ -25,7 +25,7 @@ const Login = () => {
           ["login"],
           "/loginWeb",
           { email: values.Mail, password: values.Pass },
-          "post",
+          "POST",
           false
         )
       );

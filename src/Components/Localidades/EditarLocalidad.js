@@ -10,7 +10,7 @@ import { fetchApi } from "../../Redux/Acciones/Fetch";
 const EditarLocalidad = props => {
   const formik = useFormik({
     initialValues: {
-      Localidad: props.nombre
+      Localidad: props.Localidad.nombre
     },
     validationSchema: Yup.object({
       Localidad: Yup.string()
@@ -22,11 +22,11 @@ const EditarLocalidad = props => {
         .dispatch(
           fetchApi(
             ["UPDATE_LOCALIDAD", "SUCCES"],
-            "/localidades",
+            "/localidades/" + props.Localidad.id,
             { nombre: values.Localidad },
-            "POST"
+            "PUT"
           )
-        )
+        ).then(()=> { store.dispatch(fetchApi(["GET_LOCALIDADES", "SUCCES"], "/localidades")) } )
         .then(props.history.push("/Localidades"));
     }
   });
@@ -78,7 +78,7 @@ const EditarLocalidad = props => {
   );
 };
 const mapStateToProps = state => {
-  // console.log(state.Empresas.empr.data);
-  return { App: state.App.App, Localidad: state.Localidades.Seleccionada };
+   console.log(state.Localidades);
+  return { App: state.App.App, Localidad: state.Localidades.Localidad };
 };
 export default connect(mapStateToProps)(EditarLocalidad);

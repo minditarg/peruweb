@@ -16,16 +16,39 @@ import {
   SELECT_LOCALIDAD
 } from "../../Redux/Acciones/LocalidadesActions";
 class LocalidadesTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {   modalOpen:false};
+  }
   componentDidMount() {
+  
+  
     store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades"));
   }
   selectLocalidad(localidad) {
-    console.log(localidad);
     store.dispatch({
       type: SELECT_LOCALIDAD,
       payload: localidad
     });
     this.props.history.push("/Localidades/" + localidad.id);
+  }
+  OpenModal(e) {
+    this.setState({
+      modalOpen:true,
+      Seleccionado: e
+    });
+  }
+  eliminar() {
+    console.log("eliminando");
+    store.dispatch(
+      fetchApi(
+        [DELETE_LOCALIDAD, "SUCCES"],
+        "/localidades/" + this.state.Seleccionado.id,
+        {},
+        "delete"
+      )
+    )
+    .then(()=> { store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades")) } )
   }
   render() {
     if (this.props.App.isLoading) {
@@ -80,11 +103,16 @@ class LocalidadesTable extends Component {
                   eliminable
                   router={this.props.router}
                   editar={e => this.selectLocalidad(e)}
+                  eliminar={e => this.OpenModal(e)}
                 ></Table>
               </div>
             </div>
           </div>
-          <Modal modalId="eliminar" nombre="regato" />
+          <Modal
+            aceptar={() => this.eliminar()}
+            show={this.state.modalOpen}
+            modalId="eliminar"
+          />
         </div>
       );
     }

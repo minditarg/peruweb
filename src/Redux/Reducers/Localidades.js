@@ -20,7 +20,7 @@ function reducer(state = initialState, { type, payload }) {
       return { ...state, Localidades: payload.data };
     }
     case SELECT_LOCALIDAD: {
-      return { ...state, Localidad: payload.data };
+      return { ...state, Localidad: payload };
     }
     case GET_LOCALIDADES_DELETED: {
       return { ...state, LocalidadesDeleted: payload.data };

@@ -55,7 +55,7 @@ export function fetchApi(
         Authorization: "Bearer " + accessToken,
         ...(!multipart ? { "Content-Type": "application/json" } : {})
       },
-      ...((metodo === "post") | (metodo === "put")
+      ...((metodo === "POST") | (metodo === "PUT")
         ? { body: multipart ? payload : JSON.stringify(payload) }
         : {})
     })
