@@ -8,11 +8,11 @@ import {
   SELECT_CATEGORIA
 } from "../Acciones/CategoriasActions";
 
-const initialState = []; /* {
+const initialState =   {
   Categorias: "No hay Categorias",
   Categoria: "No hay categoria seleccionada",
   CategoriasDeleted: "no hay categorias eliminadas"
-};*/
+};
 
 function reducer(state = initialState, { type, payload }) {
   switch (type) {

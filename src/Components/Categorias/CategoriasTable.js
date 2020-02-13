@@ -24,7 +24,6 @@ class CategoriasTable extends Component {
   componentDidMount() {
     store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
   }
-
   selectCategoria(categoria) {
     store.dispatch({
       type: SELECT_CATEGORIA,

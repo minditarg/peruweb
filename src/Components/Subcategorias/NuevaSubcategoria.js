@@ -2,8 +2,24 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "../Select/Select";
+import { connect } from "react-redux";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
 
-const NuevaSubcategoria = () => {
+import store from "../../Redux/Store";
+import {
+  GET_SUBCATEGORIAS,
+  CREATE_SUBCATEGORIA,
+  RESTORE_SUBCATEGORIAS,
+  GET_SUBCATEGORIAS_DELETED,
+  SELECT_SUBCATEGORIAS
+} from "../../Redux/Acciones/SubcategoriasActions";
+const NuevaSubcategoria = props => {
+  let OpCategorias;
+  if (!props.App.isLoading) {
+     OpCategorias = props.Categorias.map(function(item, i){
+      return {value: item.id, label:item.nombre};
+    });
+}
   const formik = useFormik({
     initialValues: {
       Categoria: "",
@@ -16,17 +32,31 @@ const NuevaSubcategoria = () => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch(
+        fetchApi(
+          [CREATE_SUBCATEGORIA, "SUCCES"],
+          "/subcategorias",
+          {
+            nombre: values.Subcategoria,
+            categoriaId: values.Categoria.value
+          },
+          "POST",
+        )
+      ).then(()=> { store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias")) } )
+      .then(props.history.push("/Subcategorias"));
     }
   });
 
-  const OpCategorias = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" }
-  ];
+  // const OpCategorias = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" }
+  // ];
 
+
+  
   return (
+    
     <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -89,4 +119,7 @@ const NuevaSubcategoria = () => {
   );
 };
 
-export default NuevaSubcategoria;
+const mapStateToProps = state => {
+  return { App: state.App.App, Categorias: state.Categorias.Categorias };
+};
+export default connect(mapStateToProps)(NuevaSubcategoria);

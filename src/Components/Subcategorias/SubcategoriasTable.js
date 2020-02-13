@@ -6,19 +6,47 @@ import { fetchApi } from "../../Redux/Acciones/Fetch";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import {
+  GET_CATEGORIAS
+} from "../../Redux/Acciones/CategoriasActions";
+
+import {
   GET_SUBCATEGORIAS,
   UPDATE_SUBCATEGORIAS,
-  DELETE_SUBCATEGORIAS,
+  DELETE_SUBCATEGORIA,
   CREATE_SUBCATEGORIAS,
   RESTORE_SUBCATEGORIAS,
   GET_SUBCATEGORIAS_DELETED,
-  SELECT_SUBCATEGORIAS
+  SELECT_SUBCATEGORIA
 } from "../../Redux/Acciones/SubcategoriasActions";
 class SubcategoriasTable extends Component {
   componentDidMount() {
     store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias"));
+    store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
   }
-
+  selectSubcategoria(subcategoria) {
+    store.dispatch({
+      type: SELECT_SUBCATEGORIA,
+      payload: subcategoria
+    });
+    this.props.history.push("/Subcategorias/" + subcategoria.id);
+  }
+  OpenModal(e) {
+    this.setState({
+      modalOpen:true,
+      Seleccionado: e
+    });
+  }
+  eliminar() {
+    store.dispatch(
+      fetchApi(
+        [DELETE_SUBCATEGORIA, "SUCCES"],
+        "/categoria/" + this.state.Seleccionado.id,
+        {},
+        "delete"
+      )
+    )
+    .then(()=> { store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias")) } );
+  }
   render() {
     if (this.props.App.isLoading) {
       return (
@@ -71,7 +99,7 @@ class SubcategoriasTable extends Component {
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Subcategorias/" + e)}
+                  editar={e => this.selectSubcategoria(e)}
                 ></Table>
               </div>
             </div>
@@ -84,7 +112,7 @@ class SubcategoriasTable extends Component {
 
   tableColumns = [
     { title: "Subcategoria", data: "nombre" },
-    { title: "Categoria Padre", data: "id" }
+    { title: "Categoria Padre", data: "categoria.nombre" }
   ];
 }
 const mapStateToProps = state => {
