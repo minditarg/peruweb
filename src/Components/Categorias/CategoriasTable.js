@@ -23,7 +23,30 @@ class CategoriasTable extends Component {
   componentDidMount() {
     store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
   }
-
+  selectCategoria(categoria) {
+    store.dispatch({
+      type: SELECT_CATEGORIA,
+      payload: categoria
+    });
+    this.props.history.push("/Categorias/" + categoria.id);
+  }
+  OpenModal(e) {
+    this.setState({
+      modalOpen:true,
+      Seleccionado: e
+    });
+  }
+  eliminar() {
+    store.dispatch(
+      fetchApi(
+        [DELETE_CATEGORIA, "SUCCES"],
+        "/categoria/" + this.state.Seleccionado.id,
+        {},
+        "delete"
+      )
+    )
+    .then(()=> { store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias")) } )
+  }
   render() {
     if (this.props.App.isLoading) {
       return (
@@ -72,7 +95,7 @@ class CategoriasTable extends Component {
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Categorias/" + e)}
+                  editar={e => this.selectCategoria(e)}
                 ></Table>
               </div>
             </div>

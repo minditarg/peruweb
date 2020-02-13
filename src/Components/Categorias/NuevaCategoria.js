@@ -17,7 +17,7 @@ import {
   SELECT_CATEGORIA
 } from "../../Redux/Acciones/CategoriasActions";
 
-const NuevaCategoria = () => {
+const NuevaCategoria = props => {
   const formik = useFormik({
     initialValues: {
       Categoria: ""
@@ -35,10 +35,11 @@ const NuevaCategoria = () => {
           {
             nombre: values.Categoria
           },
-          "post",
+          "POST",
           false
         )
-      );
+      ).then(()=> { store.dispatch(fetchApi(["GET_CATEGORIAS", "SUCCES"], "/categorias")) } )
+      .then(props.history.push("/Categorias"));
     }
   });
 

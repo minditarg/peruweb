@@ -84,7 +84,7 @@ class SubcategoriasTable extends Component {
 
   tableColumns = [
     { title: "Subcategoria", data: "nombre" },
-    { title: "Categoria Padre", data: "id" }
+    { title: "Categoria Padre", data: "categoria.nombre" }
   ];
 }
 const mapStateToProps = state => {

@@ -1,11 +1,15 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { connect } from "react-redux";
+import store from "../../Redux/Store";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
 
-const EditarCategoria = () => {
+const EditarCategoria = props => {
   const formik = useFormik({
+
     initialValues: {
-      Categoria: ""
+      Categoria: props.Categoria.nombre
     },
     validationSchema: Yup.object({
       Categoria: Yup.string()
@@ -13,7 +17,17 @@ const EditarCategoria = () => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store
+        .dispatch(
+          fetchApi(
+            ["UPDATE_CATEGORIA", "SUCCES"],
+            "/categorias/" + props.Categoria.id,
+            { nombre: values.Categoria },
+            "PUT"
+          )
+          
+        ).then(()=> { store.dispatch(fetchApi(["GET_CATEGORIAS", "SUCCES"], "/categorias")) } )
+        .then(props.history.push("/Categorias"));
     }
   });
   return (
@@ -63,4 +77,7 @@ const EditarCategoria = () => {
     </div>
   );
 };
-export default EditarCategoria;
+const mapStateToProps = state => {
+ return { App: state.App.App, Categoria: state.Categorias.Categoria };
+};
+export default connect(mapStateToProps)(EditarCategoria);

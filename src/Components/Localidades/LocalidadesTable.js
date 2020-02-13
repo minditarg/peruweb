@@ -21,8 +21,6 @@ class LocalidadesTable extends Component {
     this.state = {   modalOpen:false};
   }
   componentDidMount() {
-  
-  
     store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades"));
   }
   selectLocalidad(localidad) {
@@ -39,7 +37,6 @@ class LocalidadesTable extends Component {
     });
   }
   eliminar() {
-    console.log("eliminando");
     store.dispatch(
       fetchApi(
         [DELETE_LOCALIDAD, "SUCCES"],

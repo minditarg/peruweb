@@ -2,8 +2,9 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "../Select/Select";
+import { connect } from "react-redux";
 
-const NuevaSubcategoria = () => {
+const NuevaSubcategoria = props => {
   const formik = useFormik({
     initialValues: {
       Categoria: "",
@@ -20,11 +21,14 @@ const NuevaSubcategoria = () => {
     }
   });
 
-  const OpCategorias = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" }
-  ];
+  // const OpCategorias = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" }
+  // ];
+  const OpCategorias = this.props.Categorias.map(function(item, i){
+    return {value: item.id, label:item.nombre};
+  });
 
   return (
     <div className="col-xl-12 col-lg-12">
@@ -89,4 +93,7 @@ const NuevaSubcategoria = () => {
   );
 };
 
-export default NuevaSubcategoria;
+const mapStateToProps = state => {
+  return { App: state.App.App, Categorias: state.Categorias.Categorias };
+};
+export default connect(mapStateToProps)(NuevaSubcategoria);
