@@ -18,11 +18,9 @@ import {
 class LocalidadesTable extends Component {
   constructor(props) {
     super(props);
-    this.state = {   modalOpen:false};
+    this.state = { modalOpen: false, Seleccionado: { nombre: "", id: "" } };
   }
   componentDidMount() {
-  
-  
     store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades"));
   }
   selectLocalidad(localidad) {
@@ -33,22 +31,26 @@ class LocalidadesTable extends Component {
     this.props.history.push("/Localidades/" + localidad.id);
   }
   OpenModal(e) {
+    console.log(e);
     this.setState({
-      modalOpen:true,
+      modalOpen: true,
       Seleccionado: e
     });
   }
   eliminar() {
     console.log("eliminando");
-    store.dispatch(
-      fetchApi(
-        [DELETE_LOCALIDAD, "SUCCES"],
-        "/localidades/" + this.state.Seleccionado.id,
-        {},
-        "delete"
+    store
+      .dispatch(
+        fetchApi(
+          [DELETE_LOCALIDAD, "SUCCES"],
+          "/localidades/" + this.state.Seleccionado.id,
+          {},
+          "delete"
+        )
       )
-    )
-    .then(()=> { store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades")) } )
+      .then(() => {
+        store.dispatch(fetchApi([GET_LOCALIDADES, "SUCCES"], "/localidades"));
+      });
   }
   render() {
     if (this.props.App.isLoading) {
@@ -109,6 +111,8 @@ class LocalidadesTable extends Component {
             </div>
           </div>
           <Modal
+            elemento="la localidad"
+            seleccionado={this.state.Seleccionado.nombre}
             aceptar={() => this.eliminar()}
             show={this.state.modalOpen}
             modalId="eliminar"

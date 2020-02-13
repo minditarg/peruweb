@@ -17,11 +17,42 @@ import {
 } from "../../Redux/Acciones/CategoriasActions";
 
 class CategoriasTable extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = { modalOpen: false, Seleccionado: { nombre: "", id: "" } };
   }
   componentDidMount() {
     store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
+  }
+
+  selectCategoria(categoria) {
+    store.dispatch({
+      type: SELECT_CATEGORIA,
+      payload: categoria
+    });
+    this.props.history.push("/Categorias/" + categoria.id);
+  }
+  OpenModal(e) {
+    console.log(e);
+    this.setState({
+      modalOpen: true,
+      Seleccionado: e
+    });
+  }
+  eliminar() {
+    console.log("eliminando");
+    store
+      .dispatch(
+        fetchApi(
+          [DELETE_CATEGORIA, "SUCCES"],
+          "/categorias/" + this.state.Seleccionado.id,
+          {},
+          "delete"
+        )
+      )
+      .then(() => {
+        store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
+      });
   }
 
   render() {
@@ -45,7 +76,6 @@ class CategoriasTable extends Component {
               <div className="table-responsive">LOADING....</div>
             </div>
           </div>
-          <Modal modalId="eliminar" nombre="regato" />
         </div>
       );
     } else {
@@ -72,12 +102,20 @@ class CategoriasTable extends Component {
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Categorias/" + e)}
+                  editar={e => this.selectCategoria(e)}
+                  eliminar={e => this.OpenModal(e)}
+                  //  editar={e => this.props.history.push("/Categorias/" + e)}
                 ></Table>
               </div>
             </div>
           </div>
-          <Modal modalId="eliminar" nombre="regato" />
+          <Modal
+            elemento="la categoria"
+            seleccionado={this.state.Seleccionado.nombre}
+            aceptar={() => this.eliminar()}
+            show={this.state.modalOpen}
+            modalId="eliminar"
+          />
         </div>
       );
     }

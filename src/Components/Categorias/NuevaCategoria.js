@@ -1,11 +1,9 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
+import { connect } from "react-redux";
 import store from "../../Redux/Store";
 import { fetchApi } from "../../Redux/Acciones/Fetch";
-import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
 
 import {
   GET_CATEGORIAS,
@@ -17,7 +15,7 @@ import {
   SELECT_CATEGORIA
 } from "../../Redux/Acciones/CategoriasActions";
 
-const NuevaCategoria = () => {
+const NuevaCategoria = props => {
   const formik = useFormik({
     initialValues: {
       Categoria: ""
@@ -28,17 +26,19 @@ const NuevaCategoria = () => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      store.dispatch(
-        fetchApi(
-          [CREATE_CATEGORIA, "SUCCES"],
-          "/categorias",
-          {
-            nombre: values.Categoria
-          },
-          "post",
-          false
+      store
+        .dispatch(
+          fetchApi(
+            [UPDATE_CATEGORIA, "SUCCES"],
+            "/categorias",
+            { nombre: values.Categoria },
+            "POST"
+          )
         )
-      );
+        .then(() => {
+          store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
+        })
+        .then(props.history.push("/Categorias"));
     }
   });
 
@@ -70,9 +70,12 @@ const NuevaCategoria = () => {
 
             <div className="form-group row">
               <div className="col-sm-3 offset-md-3">
-                <a href="#" className="btn btn-danger btn-user btn-block">
+                <button
+                  onClick={() => props.history.push("/Categorias")}
+                  className="btn btn-danger btn-user btn-block"
+                >
                   Cancelar
-                </a>
+                </button>
               </div>
               <div className="col-sm-3 ">
                 <button
@@ -89,4 +92,8 @@ const NuevaCategoria = () => {
     </div>
   );
 };
-export default NuevaCategoria;
+const mapStateToProps = state => {
+  // console.log(state.Empresas.empr.data);
+  return { App: state.App.App };
+};
+export default connect(mapStateToProps)(NuevaCategoria);

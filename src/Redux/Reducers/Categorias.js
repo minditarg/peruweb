@@ -20,7 +20,7 @@ function reducer(state = initialState, { type, payload }) {
       return { ...state, Categorias: payload.data };
     }
     case SELECT_CATEGORIA: {
-      return { ...state, Categoria: payload.data };
+      return { ...state, Categoria: payload };
     }
     case GET_CATEGORIAS_DELETED: {
       return { ...state, CategoriasDeleted: payload.data };

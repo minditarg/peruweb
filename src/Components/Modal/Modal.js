@@ -15,7 +15,7 @@ class Modal extends Component {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                Eliminar
+                Eliminar {this.props.seleccionado}.
               </h5>
               <button
                 className="close"
@@ -27,7 +27,7 @@ class Modal extends Component {
               </button>
             </div>
             <div className="modal-body">
-              Desea eliminar el proveedor {this.props.seleccionado}.
+              Desea eliminar {this.props.elemento} {this.props.seleccionado}.
             </div>
             <div className="modal-footer">
               <button
@@ -40,6 +40,7 @@ class Modal extends Component {
               <button
                 className="btn btn-primary"
                 onClick={() => this.props.aceptar()}
+                data-dismiss="modal"
               >
                 Si, eliminalo
               </button>

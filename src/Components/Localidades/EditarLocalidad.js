@@ -26,7 +26,12 @@ const EditarLocalidad = props => {
             { nombre: values.Localidad },
             "PUT"
           )
-        ).then(()=> { store.dispatch(fetchApi(["GET_LOCALIDADES", "SUCCES"], "/localidades")) } )
+        )
+        .then(() => {
+          store.dispatch(
+            fetchApi(["GET_LOCALIDADES", "SUCCES"], "/localidades")
+          );
+        })
         .then(props.history.push("/Localidades"));
     }
   });
@@ -59,9 +64,12 @@ const EditarLocalidad = props => {
           </div>
           <div className="form-group row">
             <div className="col-sm-3 offset-md-3">
-              <a href="#" className="btn btn-danger btn-user btn-block">
+              <button
+                onClick={() => props.history.push("/Localidades")}
+                className="btn btn-danger btn-user btn-block"
+              >
                 Cancelar
-              </a>
+              </button>
             </div>
             <div className="col-sm-3 ">
               <button
@@ -78,7 +86,7 @@ const EditarLocalidad = props => {
   );
 };
 const mapStateToProps = state => {
-   console.log(state.Localidades);
+  console.log(state.Localidades);
   return { App: state.App.App, Localidad: state.Localidades.Localidad };
 };
 export default connect(mapStateToProps)(EditarLocalidad);

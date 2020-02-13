@@ -10,7 +10,7 @@ import { fetchApi } from "../../Redux/Acciones/Fetch";
 const NuevaLocalidad = props => {
   const formik = useFormik({
     initialValues: {
-      Localidad:''
+      Localidad: ""
     },
     validationSchema: Yup.object({
       Localidad: Yup.string()
@@ -27,7 +27,11 @@ const NuevaLocalidad = props => {
             "POST"
           )
         )
-        .then(()=> { store.dispatch(fetchApi(["GET_LOCALIDADES", "SUCCES"], "/localidades")) } )
+        .then(() => {
+          store.dispatch(
+            fetchApi(["GET_LOCALIDADES", "SUCCES"], "/localidades")
+          );
+        })
         .then(props.history.push("/Localidades"));
     }
   });
@@ -60,9 +64,12 @@ const NuevaLocalidad = props => {
           </div>
           <div className="form-group row">
             <div className="col-sm-3 offset-md-3">
-              <a href="#" className="btn btn-danger btn-user btn-block">
+              <button
+                onClick={() => props.history.push("/Localidades")}
+                className="btn btn-danger btn-user btn-block"
+              >
                 Cancelar
-              </a>
+              </button>
             </div>
             <div className="col-sm-3 ">
               <button
@@ -80,6 +87,6 @@ const NuevaLocalidad = props => {
 };
 const mapStateToProps = state => {
   // console.log(state.Empresas.empr.data);
-  return { App: state.App.App};
+  return { App: state.App.App };
 };
 export default connect(mapStateToProps)(NuevaLocalidad);

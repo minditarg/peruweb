@@ -80,15 +80,6 @@ class ProveedoresEliminados extends Component {
               <h6 className="m-0 font-weight-bold text-primary">
                 Proveedores Eliminados
               </h6>
-              <NavLink
-                to="/NuevoProveedor"
-                className="btn btn-primary btn-icon-split"
-              >
-                <span className="icon text-white-50">
-                  <i className="fas fa-plus"></i>
-                </span>
-                <span className="text">Nuevo Proveedor</span>
-              </NavLink>
             </div>
             <div className="card-body">
               <div className="table-responsive">
@@ -96,7 +87,7 @@ class ProveedoresEliminados extends Component {
                   data={this.props.Empresas}
                   columns={this.tableColumns}
                   editable
-                  eliminable
+                  restaurable
                   router={this.props.router}
                   editar={e => this.props.history.push("/Proveedores/" + e)}
                   eliminar={e => this.OpenModal(e)}
