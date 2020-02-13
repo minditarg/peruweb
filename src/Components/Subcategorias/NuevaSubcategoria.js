@@ -3,8 +3,23 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "../Select/Select";
 import { connect } from "react-redux";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
 
+import store from "../../Redux/Store";
+import {
+  GET_SUBCATEGORIAS,
+  CREATE_SUBCATEGORIA,
+  RESTORE_SUBCATEGORIAS,
+  GET_SUBCATEGORIAS_DELETED,
+  SELECT_SUBCATEGORIAS
+} from "../../Redux/Acciones/SubcategoriasActions";
 const NuevaSubcategoria = props => {
+  let OpCategorias;
+  if (!props.App.isLoading) {
+     OpCategorias = props.Categorias.map(function(item, i){
+      return {value: item.id, label:item.nombre};
+    });
+}
   const formik = useFormik({
     initialValues: {
       Categoria: "",
@@ -17,7 +32,18 @@ const NuevaSubcategoria = props => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch(
+        fetchApi(
+          [CREATE_SUBCATEGORIA, "SUCCES"],
+          "/subcategorias",
+          {
+            nombre: values.Subcategoria,
+            categoriaId: values.Categoria.value
+          },
+          "POST",
+        )
+      ).then(()=> { store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias")) } )
+      .then(props.history.push("/Subcategorias"));
     }
   });
 
@@ -26,11 +52,11 @@ const NuevaSubcategoria = props => {
   //   { value: "strawberry", label: "Strawberry" },
   //   { value: "vanilla", label: "Vanilla" }
   // ];
-  const OpCategorias = this.props.Categorias.map(function(item, i){
-    return {value: item.id, label:item.nombre};
-  });
 
+
+  
   return (
+    
     <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
         <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
