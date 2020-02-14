@@ -30,8 +30,14 @@ class ProveedoresTable extends Component {
       Seleccionado: e
     });
   }
+  selectProveedor(proveedor) {
+    store.dispatch({
+      type: SELECT_EMPRESA,
+      payload: proveedor
+    });
+    this.props.history.push("/Proveedores/" + proveedor.id);
+  }
   eliminar() {
-    console.log("eliminando");
     store.dispatch(
       fetchApi(
         [DELETE_EMPRESA, "SUCCES"],
@@ -39,9 +45,14 @@ class ProveedoresTable extends Component {
         {},
         "delete"
       )
-    );
-    store.dispatch(fetchApi([GET_EMPRESAS, "SUCCES"], "/proveedores/listado"));
+    )
+    .then(() => {
+      store.dispatch(fetchApi([GET_EMPRESAS, "SUCCES"], "/proveedores/listado"));
+    });
+    
+    
   }
+  
   render() {
     if (this.props.App.isLoading) {
       return (
@@ -49,7 +60,7 @@ class ProveedoresTable extends Component {
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">Proveedores</h6>
-              <NavLink
+              {/* <NavLink
                 to="/NuevoProveedor"
                 className="btn btn-primary btn-icon-split"
               >
@@ -57,7 +68,7 @@ class ProveedoresTable extends Component {
                   <i className="fas fa-plus"></i>
                 </span>
                 <span className="text">Nuevo Proveedor</span>
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className="card-body">
               <div className="table-responsive">LOADING....</div>
@@ -72,7 +83,7 @@ class ProveedoresTable extends Component {
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">Proveedores</h6>
-              <NavLink
+              {/* <NavLink
                 to="/NuevoProveedor"
                 className="btn btn-primary btn-icon-split"
               >
@@ -80,7 +91,7 @@ class ProveedoresTable extends Component {
                   <i className="fas fa-plus"></i>
                 </span>
                 <span className="text">Nuevo Proveedor</span>
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className="card-body">
               <div className="table-responsive">
@@ -90,7 +101,7 @@ class ProveedoresTable extends Component {
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Proveedores/" + e)}
+                  editar={e => this.selectProveedor(e)}
                   eliminar={e => this.OpenModal(e)}
                 ></Table>
               </div>

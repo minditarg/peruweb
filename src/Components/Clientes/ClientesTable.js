@@ -18,6 +18,31 @@ class ClientesTable extends Component {
   componentDidMount() {
     store.dispatch(fetchApi([GET_CLIENTES, "SUCCES"], "/cliente/listado"));
   }
+  OpenModal(e) {
+    this.setState({
+      Seleccionado: e
+    });
+  }
+  selectCliente(cliente) {
+    store.dispatch({
+      type: SELECT_CLIENTE,
+      payload: cliente
+    });
+    this.props.history.push("/Clientes/" + cliente.id);
+  }
+  eliminar() {
+    store.dispatch(
+      fetchApi(
+        [DELETE_CLIENTE, "SUCCES"],
+        "/cliente/" + this.state.Seleccionado.id,
+        {},
+        "delete"
+      )
+    )
+    .then(() => {
+      store.dispatch(fetchApi([GET_CLIENTES, "SUCCES"], "/cliente/listado"));
+    });
+  }
   render() {
     if (this.props.App.isLoading) {
       return (
@@ -25,7 +50,7 @@ class ClientesTable extends Component {
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">Clientes </h6>
-              <NavLink
+              {/* <NavLink
                 to="/NuevoCliente"
                 className="btn btn-primary btn-icon-split"
               >
@@ -33,7 +58,7 @@ class ClientesTable extends Component {
                   <i className="fas fa-plus"></i>
                 </span>
                 <span className="text">Nuevo Cliente</span>
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className="card-body">
               <div className="table-responsive">LOADING....</div>
@@ -48,7 +73,7 @@ class ClientesTable extends Component {
           <div className="card shadow mb-4">
             <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
               <h6 className="m-0 font-weight-bold text-primary">Clientes </h6>
-              <NavLink
+              {/* <NavLink
                 to="/NuevoCliente"
                 className="btn btn-primary btn-icon-split"
               >
@@ -56,7 +81,7 @@ class ClientesTable extends Component {
                   <i className="fas fa-plus"></i>
                 </span>
                 <span className="text">Nuevo Cliente</span>
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className="card-body">
               <div className="table-responsive">
@@ -66,12 +91,20 @@ class ClientesTable extends Component {
                   editable
                   eliminable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Clientes/" + e)}
+                  editar={e => this.selectCliente(e)}
+                  eliminar={e => this.OpenModal(e)}
                 ></Table>
               </div>
             </div>
           </div>
-          <Modal modalId="eliminar" nombre="regato" />
+          <Modal
+            seleccionadoid={this.state.Seleccionado.id}
+            seleccionado={this.state.Seleccionado.nombre}
+            aceptar={() => this.eliminar()}
+            show={true}
+            modalId="eliminar"
+            nombre="regato"
+          />
         </div>
       );
     }

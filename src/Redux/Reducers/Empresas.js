@@ -20,7 +20,7 @@ function reducer(state = initialState, { type, payload }) {
       return { ...state, Empresas: payload.data };
     }
     case SELECT_EMPRESA: {
-      return { ...state, Empresa: payload.data };
+      return { ...state, Empresa: payload };
     }
     case GET_EMPRESAS_DELETED: {
       return { ...state, EmpresasDeleted: payload.data };

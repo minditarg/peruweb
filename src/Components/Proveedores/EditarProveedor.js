@@ -1,37 +1,66 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { connect } from "react-redux";
+import store from "../../Redux/Store";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
 import Select from "../Select/Select";
-const EditarProveedor = () => {
+
+import {
+  GET_EMPRESAS,
+  UPDATE_EMPRESA,
+  DELETE_EMPRESA,
+  CREATE_EMPRESA,
+  RESTORE_EMPRESA,
+  GET_EMPRESAS_DELETED,
+  SELECT_EMPRESA
+} from "../../Redux/Acciones/EmpresasActions";
+
+const EditarProveedor = props => {
+  
   const formik = useFormik({
     initialValues: {
-      Nombre: "",
-      Mail: "",
-      Telefono: "",
-      Direccion: "",
-      Localidad: "",
-      Descripcion: "",
-      Tipo: ""
+      Empresa: props.Empresa,
+      Nombre: props.Empresa.nombre,
+      Mail: props.Empresa.email,
+      Telefono: props.Empresa.telefono,
+      Direccion: props.Empresa.direccion,
+      //Localidad: props.Empresa.localidad.nombre,
+      Descripcion: props.Empresa.descripcion,
+      Tipo: props.Empresa.tipo,
+      NuevoTipo: props.Empresa.tipo
     },
     validationSchema: Yup.object({
-      Nombre: Yup.string()
-        .min(3, "el nombre tiene que tener al menos 3 caracteres")
-        .required("Obligatorio"),
-      Mail: Yup.string()
-        .email("debe ingresar un email válido")
-        .required("Obligatorio"),
-      Telefono: Yup.number().required("Obligatorio"),
-      Direccion: Yup.string()
-        .min(3, "La dirección tiene que tener al menos 3 caracteres")
-        .required("Obligatorio"),
-      Localidad: Yup.string().required("Obligatorio"),
-      Descripcion: Yup.string()
-        .min(3, "La Descripción tiene que tener al menos 3 caracteres")
-        .required("Obligatorio"),
-      Tipo: Yup.string().required("Obligatorio")
+      // Nombre: Yup.string()
+      //   .min(3, "el nombre tiene que tener al menos 3 caracteres")
+      //   .required("Obligatorio"),
+      // Mail: Yup.string()
+      //   .email("debe ingresar un email válido")
+      //   .required("Obligatorio"),
+      // Telefono: Yup.number().required("Obligatorio"),
+      // Direccion: Yup.string()
+      //   .min(3, "La dirección tiene que tener al menos 3 caracteres")
+      //   .required("Obligatorio"),
+      // //Localidad: Yup.string().required("Obligatorio"),
+      // Descripcion: Yup.string()
+      //   .min(3, "La Descripción tiene que tener al menos 3 caracteres")
+      //   .required("Obligatorio"),
+      // Tipo: Yup.string().required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store
+        .dispatch(
+          fetchApi(
+            [UPDATE_EMPRESA, "SUCCES"],
+            "/proveedor/cambiarTipo/"+ props.Empresa.id,
+            { tipo: values.NuevoTipo.value },
+            "POST"
+          )
+        )
+        .then(() => {
+          store.dispatch(fetchApi([GET_EMPRESAS, "SUCCES"], "/proveedores/listado"));
+        })
+        .then(props.history.push("/Proveedores"));
     }
   });
   const OpLocalidad = [
@@ -42,7 +71,7 @@ const EditarProveedor = () => {
   const OpTipo = [
     { value: "Premium", label: "Premium" },
     { value: "Supervisado", label: "Supervisado" },
-    { value: "Standard", label: "Standard" }
+    { value: "Standar", label: "Standar" }
   ];
 
   return (
@@ -60,6 +89,7 @@ const EditarProveedor = () => {
                   placeholder="Nombre"
                   id="Nombre"
                   name="Nombre"
+                  disabled
                   type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -78,6 +108,7 @@ const EditarProveedor = () => {
                   placeholder="Mail"
                   id="Mail"
                   name="Mail"
+                  disabled
                   type="email"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
@@ -94,6 +125,7 @@ const EditarProveedor = () => {
                   className="form-control form-control-user"
                   placeholder="Telefono"
                   id="Telefono"
+                  disabled
                   name="Telefono"
                   type="number"
                   onChange={formik.handleChange}
@@ -105,7 +137,7 @@ const EditarProveedor = () => {
                 ) : null}
               </div>
             </div>
-            <div className="form-group row">
+            {/* <div className="form-group row">
               <div className="col-sm-6 offset-md-3">
                 <Select
                   idselect="Localidad"
@@ -120,13 +152,14 @@ const EditarProveedor = () => {
                   <div className="formError">{formik.errors.Localidad}</div>
                 ) : null}
               </div>
-            </div>
+            </div> */}
             <div className="form-group row">
               <div className="col-sm-6 offset-md-3 mb-3 mb-sm-0">
                 <input
                   className="form-control form-control-user"
                   placeholder="Direccion"
                   id="Direccion"
+                  disabled
                   name="Direccion"
                   type="text"
                   onChange={formik.handleChange}
@@ -146,6 +179,7 @@ const EditarProveedor = () => {
                   id="Descripcion"
                   name="Descripcion"
                   type="text"
+                  disabled
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.Descripcion}
@@ -157,27 +191,50 @@ const EditarProveedor = () => {
             </div>
             <div className="form-group row">
               <div className="col-sm-6 offset-md-3">
-                <Select
-                  idselect="Tipo"
-                  options={OpTipo}
+                <textarea
+                  className="form-control form-control-user"
+                  placeholder="Tipo"
+                  id="Tipo"
+                  name="Tipo"
+                  type="text"
+                  disabled
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
                   value={formik.values.Tipo}
-                  onChange={formik.setFieldValue}
-                  onBlur={formik.setFieldTouched}
-                  error={formik.errors.topics}
-                  touched={formik.touched.topics}
                 />
-                {formik.touched.Tipo && formik.errors.Tipo ? (
+                {formik.touched.Tipo && formik.errors.DescripcioTipon ? (
                   <div className="formError">{formik.errors.Tipo}</div>
                 ) : null}
               </div>
             </div>
             <div className="form-group row">
+            <div className="col-sm-6 offset-md-3">
+              <h6 className="m-0 font-weight-bold text-primary">Cambiar el tipo </h6>
+              </div>
+            
+              <div className="col-sm-6 offset-md-3">
+                <Select
+                  idselect="NuevoTipo"
+                  options={OpTipo}
+                  value={formik.values.NuevoTipo}
+                  onChange={formik.setFieldValue}
+                  placeholder="Seleccione el tipo"
+                  onBlur={formik.setFieldTouched}
+                  error={formik.errors.topics}
+                  touched={formik.touched.topics}
+                />
+                {formik.touched.NuevoTipo && formik.errors.NuevoTipo ? (
+                  <div className="formError">{formik.errors.NuevoTipo}</div>
+                ) : null}
+              </div>
+            </div>
+            {/* <div className="form-group row">
               <div className=" col-sm-6 offset-md-3">
                 <button className="btn btn-primary btn-user btn-block">
                   Resetear Contraseña
                 </button>
               </div>
-            </div>
+            </div> */}
 
             <div className="form-group row">
               <div className="col-sm-3 offset-md-3">
@@ -200,4 +257,7 @@ const EditarProveedor = () => {
     </div>
   );
 };
-export default EditarProveedor;
+const mapStateToProps = state => {
+  return { App: state.App.App, Empresa: state.Empresas.Empresa };
+};
+export default connect(mapStateToProps)(EditarProveedor);

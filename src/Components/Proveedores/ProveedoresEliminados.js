@@ -32,19 +32,28 @@ class ProveedoresEliminados extends Component {
       Seleccionado: e
     });
   }
+  selectProveedor(proveedor) {
+    store.dispatch({
+      type: SELECT_EMPRESA,
+      payload: proveedor
+    });
+    this.props.history.push("/Proveedores/" + proveedor.id);
+  }
   eliminar() {
-    console.log("eliminando");
     store.dispatch(
       fetchApi(
-        [DELETE_EMPRESA, "SUCCES"],
-        "/proveedor/" + this.state.Seleccionado.id,
+        [RESTORE_EMPRESA, "SUCCES"],
+        "/proveedor/restaurar/" + this.state.Seleccionado.id,
         {},
-        "delete"
+        "POST"
       )
+    ).then( () => {
+      store.dispatch(
+        fetchApi([GET_EMPRESAS_DELETED, "SUCCES"], "/proveedores/eliminados")
+      );
+    }
     );
-    store.dispatch(
-      fetchApi([GET_EMPRESAS_DELETED, "SUCCES"], "/proveedores/eliminados")
-    );
+    
   }
   render() {
     if (this.props.App.isLoading) {
@@ -89,7 +98,7 @@ class ProveedoresEliminados extends Component {
                   editable
                   restaurable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Proveedores/" + e)}
+                  editar={e => this.selectProveedor(e)}
                   eliminar={e => this.OpenModal(e)}
                 ></Table>
               </div>
@@ -100,7 +109,7 @@ class ProveedoresEliminados extends Component {
             seleccionado={this.state.Seleccionado.nombre}
             aceptar={() => this.eliminar()}
             show={true}
-            modalId="eliminar"
+            modalId="restaurar"
             nombre="regato"
           />
         </div>
