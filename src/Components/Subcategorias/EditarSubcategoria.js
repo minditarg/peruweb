@@ -2,12 +2,30 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Select from "../Select/Select";
+import { connect } from "react-redux";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
 
-const EditarSubcategoria = () => {
+import store from "../../Redux/Store";
+import {
+  GET_SUBCATEGORIAS,
+  CREATE_SUBCATEGORIA,
+  UPDATE_SUBCATEGORIA,
+  RESTORE_SUBCATEGORIAS,
+  GET_SUBCATEGORIAS_DELETED,
+  SELECT_SUBCATEGORIAS
+} from "../../Redux/Acciones/SubcategoriasActions";
+const EditarSubcategoria = props  => {
+  let OpCategorias;
+  if (!props.App.isLoading) {
+     OpCategorias = props.Categorias.map(function(item, i){
+      return {value: item.id, label:item.nombre};
+    });
+  }
   const formik = useFormik({
+    enableReinitialize:false,
     initialValues: {
-      Categoria: "",
-      Subcategoria: ""
+      // Categoria: "",
+      Subcategoria: props.Subcategoria
     },
     validationSchema: Yup.object({
       Categoria: Yup.string().required("Obligatorio"),
@@ -16,15 +34,20 @@ const EditarSubcategoria = () => {
         .required("Obligatorio")
     }),
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      store.dispatch(
+        fetchApi(
+          [UPDATE_SUBCATEGORIA, "SUCCES"],
+          "/subcategorias/"+ props.Subcategoria.id,
+          {
+            nombre: values.Subcategoria,
+            categoriaId: values.Categoria.value
+          },
+          "PUT",
+        )
+      ).then(()=> { store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias")) } )
+      .then(props.history.push("/Subcategorias"));
     }
   });
-
-  const OpCategorias = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" }
-  ];
 
   return (
     <div className="col-xl-12 col-lg-12">
@@ -39,7 +62,8 @@ const EditarSubcategoria = () => {
                 <Select
                   idselect="Categoria"
                   options={OpCategorias}
-                  value={formik.values.Categoria}
+                  value={formik.values.Subcategoria.categoriaId}
+                  placeholder="Seleccione categoría"
                   onChange={formik.setFieldValue}
                   onBlur={formik.setFieldTouched}
                   error={formik.errors.topics}
@@ -60,7 +84,7 @@ const EditarSubcategoria = () => {
                   type="text"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.Subcategoria}
+                  value={formik.values.Subcategoria.nombre}
                 />
                 {formik.touched.Subcategoria && formik.errors.Subcategoria ? (
                   <div className="formError">{formik.errors.Subcategoria}</div>
@@ -89,4 +113,7 @@ const EditarSubcategoria = () => {
   );
 };
 
-export default EditarSubcategoria;
+const mapStateToProps = state => {
+  return { App: state.App.App, Subcategoria: state.Subcategorias.Subcategoria,Categorias: state.Categorias.Categorias  };
+};
+export default connect(mapStateToProps)(EditarSubcategoria);

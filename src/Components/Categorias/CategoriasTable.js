@@ -39,7 +39,6 @@ class CategoriasTable extends Component {
     });
   }
   eliminar() {
-    console.log("eliminando");
     store
       .dispatch(
         fetchApi(

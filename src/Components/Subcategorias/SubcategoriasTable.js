@@ -19,6 +19,10 @@ import {
   SELECT_SUBCATEGORIA
 } from "../../Redux/Acciones/SubcategoriasActions";
 class SubcategoriasTable extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { modalOpen: false, Seleccionado: { nombre: "", id: "" } };
+  }
   componentDidMount() {
     store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias"));
     store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
@@ -40,7 +44,7 @@ class SubcategoriasTable extends Component {
     store.dispatch(
       fetchApi(
         [DELETE_SUBCATEGORIA, "SUCCES"],
-        "/categoria/" + this.state.Seleccionado.id,
+        "/subcategorias/" + this.state.Seleccionado.id,
         {},
         "delete"
       )
@@ -99,12 +103,19 @@ class SubcategoriasTable extends Component {
                   editable
                   eliminable
                   router={this.props.router}
+                  eliminar={e => this.OpenModal(e)}
                   editar={e => this.selectSubcategoria(e)}
                 ></Table>
               </div>
             </div>
           </div>
-          <Modal modalId="eliminar" nombre="regato" />
+          <Modal
+            elemento="la SUBcategoria"
+            seleccionado={this.state.Seleccionado.nombre}
+            aceptar={() => this.eliminar()}
+            show={this.state.modalOpen}
+            modalId="eliminar"
+          />
         </div>
       );
     }

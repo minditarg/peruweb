@@ -19,7 +19,7 @@ const NuevaSubcategoria = props => {
      OpCategorias = props.Categorias.map(function(item, i){
       return {value: item.id, label:item.nombre};
     });
-}
+  }
   const formik = useFormik({
     initialValues: {
       Categoria: "",
@@ -47,14 +47,6 @@ const NuevaSubcategoria = props => {
     }
   });
 
-  // const OpCategorias = [
-  //   { value: "chocolate", label: "Chocolate" },
-  //   { value: "strawberry", label: "Strawberry" },
-  //   { value: "vanilla", label: "Vanilla" }
-  // ];
-
-
-  
   return (
     
     <div className="col-xl-12 col-lg-12">
@@ -71,6 +63,7 @@ const NuevaSubcategoria = props => {
                   options={OpCategorias}
                   value={formik.values.Categoria}
                   onChange={formik.setFieldValue}
+                  placeholder="Seleccione categoría"
                   onBlur={formik.setFieldTouched}
                   error={formik.errors.topics}
                   touched={formik.touched.topics}

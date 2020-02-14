@@ -35,7 +35,7 @@ const EditarLocalidad = props => {
         .then(props.history.push("/Localidades"));
     }
   });
-
+  if (!this.props.App.isLoading) {
   return (
     <div className="col-xl-12 col-lg-12">
       <div className="card shadow mb-4">
@@ -84,6 +84,7 @@ const EditarLocalidad = props => {
       </div>
     </div>
   );
+};
 };
 const mapStateToProps = state => {
   console.log(state.Localidades);

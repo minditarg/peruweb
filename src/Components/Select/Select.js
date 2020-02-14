@@ -22,6 +22,7 @@ class MySelect extends React.Component {
           onChange={this.handleChange}
           onBlur={this.handleBlur}
           value={this.props.value}
+          placeholder={this.props.placeholder}
         />
         {!!this.props.error && this.props.touched && (
           <div style={{ color: "red", marginTop: ".5rem" }}>
