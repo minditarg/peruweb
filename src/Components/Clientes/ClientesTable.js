@@ -15,6 +15,12 @@ import {
   SELECT_CLIENTE
 } from "../../Redux/Acciones/ClientesActions";
 class ClientesTable extends Component {
+  constructor() {
+    super();
+    this.state = {
+      Seleccionado: ""
+    };
+  }
   componentDidMount() {
     store.dispatch(fetchApi([GET_CLIENTES, "SUCCES"], "/cliente/listado"));
   }
