@@ -1,12 +1,18 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { connect } from "react-redux";
+import store from "../../Redux/Store";
+import { fetchApi } from "../../Redux/Acciones/Fetch";
 
-const EditarCliente = () => {
+
+const EditarCliente = props => {
   const formik = useFormik({
     initialValues: {
-      Nombre: "",
-      Mail: ""
+      Nombre: props.Cliente.Usuario.nombre,
+      Telefono: props.Cliente.telefono,
+      Direccion: props.Cliente.direccion,
+      Mail: props.Cliente.Usuario.email,
     },
     validationSchema: Yup.object({
       Nombre: Yup.string()
@@ -36,6 +42,7 @@ const EditarCliente = () => {
                   className="form-control form-control-user"
                   placeholder="Mail"
                   id="Mail"
+                  disabled
                   name="Mail"
                   type="email"
                   onChange={formik.handleChange}
@@ -54,6 +61,7 @@ const EditarCliente = () => {
                   className="form-control form-control-user"
                   placeholder="Nombre"
                   id="Nombre"
+                  disabled
                   name="Nombre"
                   type="text"
                   onChange={formik.handleChange}
@@ -66,6 +74,42 @@ const EditarCliente = () => {
               </div>
             </div>
             <div className="form-group row">
+              <div className=" col-sm-6 offset-md-3">
+                <input
+                  className="form-control form-control-user"
+                  placeholder="Nombre"
+                  id="Direccion"
+                  disabled
+                  name="Direccion"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Direccion}
+                />
+                {formik.touched.Direccion && formik.errors.Direccion ? (
+                  <div className="formError">{formik.errors.Direccion}</div>
+                ) : null}
+              </div>
+            </div>
+            <div className="form-group row">
+              <div className=" col-sm-6 offset-md-3">
+                <input
+                  className="form-control form-control-user"
+                  placeholder="Telefono"
+                  id="Telefono"
+                  disabled
+                  name="Telefono"
+                  type="text"
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.Telefono}
+                />
+                {formik.touched.Telefono && formik.errors.Telefono ? (
+                  <div className="formError">{formik.errors.Telefono}</div>
+                ) : null}
+              </div>
+            </div>
+            {/* <div className="form-group row">
               <div className=" col-sm-6 offset-md-3">
                 <button className="btn btn-primary btn-user btn-block">
                   Resetear Contraseña
@@ -86,11 +130,14 @@ const EditarCliente = () => {
                   Aceptar
                 </button>
               </div>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
     </div>
   );
 };
-export default EditarCliente;
+const mapStateToProps = state => {
+  return { App: state.App.App, Cliente: state.Clientes.Cliente };
+};
+export default connect(mapStateToProps)(EditarCliente);

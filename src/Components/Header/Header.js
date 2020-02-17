@@ -41,11 +41,11 @@ class Header extends Component {
               className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
               aria-labelledby="userDropdown"
             >
-              <NavLink to="/Perfil" className="dropdown-item">
+              {/* <NavLink to="/Perfil" className="dropdown-item">
                 <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                 Perfil
               </NavLink>
-              <div className="dropdown-divider"></div>
+              <div className="dropdown-divider"></div> */}
               <button
                 className="dropdown-item"
                 onClick={() => {

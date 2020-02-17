@@ -32,7 +32,6 @@ class CategoriasTable extends Component {
     this.props.history.push("/Categorias/" + categoria.id);
   }
   OpenModal(e) {
-    console.log(e);
     this.setState({
       modalOpen: true,
       Seleccionado: e

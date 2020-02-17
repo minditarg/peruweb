@@ -15,10 +15,44 @@ import {
   SELECT_CLIENTE
 } from "../../Redux/Acciones/ClientesActions";
 class ClientesEliminados extends Component {
+  constructor() {
+    super();
+    this.state = {
+      Seleccionado: ""
+    };
+  }
   componentDidMount() {
     store.dispatch(
       fetchApi([GET_CLIENTES_DELETED, "SUCCES"], "/cliente/eliminados")
     );
+  }
+  OpenModal(e) {
+    this.setState({
+      Seleccionado: e
+    });
+  }
+  selectCliente(cliente) {
+    store.dispatch({
+      type: SELECT_CLIENTE,
+      payload: cliente
+    });
+    this.props.history.push("/Clientes/" + cliente.id);
+  }
+  eliminar() {
+    store.dispatch(
+      fetchApi(
+        [RESTORE_CLIENTE, "SUCCES"],
+        "/cliente/restaurar/" + this.state.Seleccionado.id,
+        {},
+        "POST"
+      )
+    ).then( () => {
+      store.dispatch(
+        fetchApi([GET_CLIENTES_DELETED, "SUCCES"], "/clientes/eliminados")
+      );
+    }
+    );
+    
   }
   render() {
     if (this.props.App.isLoading) {
@@ -54,7 +88,7 @@ class ClientesEliminados extends Component {
               <h6 className="m-0 font-weight-bold text-primary">
                 Clientes Eliminados{" "}
               </h6>
-              <NavLink
+              {/* <NavLink
                 to="/NuevoCliente"
                 className="btn btn-primary btn-icon-split"
               >
@@ -62,7 +96,7 @@ class ClientesEliminados extends Component {
                   <i className="fas fa-plus"></i>
                 </span>
                 <span className="text">Nuevo Cliente</span>
-              </NavLink>
+              </NavLink> */}
             </div>
             <div className="card-body">
               <div className="table-responsive">
@@ -70,14 +104,22 @@ class ClientesEliminados extends Component {
                   data={this.props.Clientes}
                   columns={this.tableColumns}
                   editable
-                  eliminable
+                  restaurable
                   router={this.props.router}
-                  editar={e => this.props.history.push("/Clientes/" + e)}
+                  eliminar={e => this.OpenModal(e)}
+                  editar={e => this.selectCliente(e)}
                 ></Table>
               </div>
             </div>
           </div>
-          <Modal modalId="eliminar" nombre="regato" />
+          <Modal
+            seleccionadoid={this.state.Seleccionado.id}
+            seleccionado={this.state.Seleccionado.nombre}
+            aceptar={() => this.eliminar()}
+            show={true}
+            modalId="restaurar"
+            nombre="regato"
+          />
         </div>
       );
     }

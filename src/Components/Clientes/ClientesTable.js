@@ -26,6 +26,7 @@ class ClientesTable extends Component {
   }
   OpenModal(e) {
     this.setState({
+      modalOpen: true,
       Seleccionado: e
     });
   }
@@ -104,12 +105,11 @@ class ClientesTable extends Component {
             </div>
           </div>
           <Modal
-            seleccionadoid={this.state.Seleccionado.id}
-            seleccionado={this.state.Seleccionado.nombre}
+            elemento="el cliente"
+            // seleccionado={this.state.Seleccionado.Usuario}
             aceptar={() => this.eliminar()}
-            show={true}
+            show={this.state.modalOpen}
             modalId="eliminar"
-            nombre="regato"
           />
         </div>
       );

@@ -20,7 +20,7 @@ function reducer(state = initialState, { type, payload }) {
       return { ...state, Clientes: payload.data };
     }
     case SELECT_CLIENTE: {
-      return { ...state, Cliente: payload.data };
+      return { ...state, Cliente: payload };
     }
     case GET_CLIENTES_DELETED: {
       return { ...state, ClientesDeleted: payload.data };
