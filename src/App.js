@@ -17,6 +17,8 @@ import SubcategoriasTable from "./Components/Subcategorias/SubcategoriasTable";
 import EditarSubcategoria from "./Components/Subcategorias/EditarSubcategoria";
 import LocalidadesTable from "./Components/Localidades/LocalidadesTable";
 import EditarLocalidad from "./Components/Localidades/EditarLocalidad";
+import store from "./Redux/Store";
+import { fetchApi } from "./Redux/Acciones/Fetch";
 
 import ProveedoresEliminados from "./Components/Proveedores/ProveedoresEliminados";
 import NuevoProveedor from "./Components/Proveedores/NuevoProveedor";
@@ -35,11 +37,22 @@ import ScGral from "./assets/scriptGral";
 import Login from "./Components/Login/Login";
 import Olvide from "./Components/Login/Olvide";
 import { connect } from "react-redux";
-
+import {
+  GET_CATEGORIAS,
+  UPDATE_CATEGORIA,
+  DELETE_CATEGORIA,
+  CREATE_CATEGORIA,
+  RESTORE_CATEGORIA,
+  GET_CATEGORIAS_DELETED,
+  SELECT_CATEGORIA
+} from "./Redux/Acciones/CategoriasActions";
 import { Login as loginfx, Logout as logoutFx } from "./Redux/Acciones/Usuario";
 class App extends Component {
   constructor(props) {
     super(props);
+  }
+  componentDidMount() {
+    store.dispatch(fetchApi([GET_CATEGORIAS], "/categorias"));
   }
 
   render() {

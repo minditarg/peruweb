@@ -24,8 +24,9 @@ class SubcategoriasTable extends Component {
     this.state = { modalOpen: false, Seleccionado: { nombre: "", id: "" } };
   }
   componentDidMount() {
+    store.dispatch(fetchApi([GET_CATEGORIAS ], "/categorias"));
+
     store.dispatch(fetchApi([GET_SUBCATEGORIAS, "SUCCES"], "/subcategorias"));
-    store.dispatch(fetchApi([GET_CATEGORIAS, "SUCCES"], "/categorias"));
   }
   selectSubcategoria(subcategoria) {
     store.dispatch({
