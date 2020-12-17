@@ -8,7 +8,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "cross-fetch": "^3.0.4",
-    "datatables.net": "^1.10.20",
+    "datatables.net": "^1.10.22",
     "formik": "^2.1.1",
     "jquery": "^3.4.1",
     "react": "^16.12.0",
